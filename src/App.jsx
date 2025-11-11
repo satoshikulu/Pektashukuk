@@ -1,7 +1,184 @@
 import { useState, useEffect, useRef } from 'react'
 import { Menu, X, Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, Phone, Mail, MessageCircle, Navigation } from 'lucide-react'
 import { Link } from 'react-scroll'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
+
+// Splash Screen Component - Hukuk Temalı Animasyon
+function SplashScreen({ onComplete }) {
+  const [showSlogan, setShowSlogan] = useState(false)
+
+  useEffect(() => {
+    // Show slogan after scale animation
+    const sloganTimer = setTimeout(() => {
+      setShowSlogan(true)
+    }, 2000)
+
+    // Complete splash screen after 5 seconds
+    const completeTimer = setTimeout(() => {
+      onComplete()
+    }, 5000)
+
+    return () => {
+      clearTimeout(sloganTimer)
+      clearTimeout(completeTimer)
+    }
+  }, [onComplete])
+
+  return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center bg-gradient-to-b from-black via-gray-900 to-black overflow-hidden"
+    >
+      {/* Particle Effects Background */}
+      <div className="absolute inset-0">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ 
+              opacity: 0,
+              x: Math.random() * window.innerWidth,
+              y: -20
+            }}
+            animate={{ 
+              opacity: [0, 0.6, 0],
+              y: window.innerHeight + 20,
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              delay: Math.random() * 2,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute w-1 h-1 bg-gold rounded-full"
+            style={{
+              boxShadow: '0 0 10px 2px rgba(212, 175, 55, 0.5)'
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="text-center px-4 relative z-10">
+        {/* Scale Icon - Drops from top and balances */}
+        <motion.div
+          initial={{ y: -300, rotate: -45, opacity: 0 }}
+          animate={{ 
+            y: 0, 
+            rotate: [0, -5, 5, -3, 3, -1, 1, 0],
+            opacity: 1
+          }}
+          transition={{ 
+            y: { duration: 0.8, ease: "easeOut" },
+            rotate: { 
+              duration: 1.5, 
+              delay: 0.8,
+              ease: "easeInOut"
+            },
+            opacity: { duration: 0.3 }
+          }}
+          className="flex justify-center mb-8"
+        >
+          <div className="relative">
+            {/* Animated Glow Effect */}
+            <motion.div
+              animate={{ 
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.6, 0.3]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="absolute inset-0 blur-3xl bg-gold rounded-full"
+            />
+            
+            {/* Golden Sparkles */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ 
+                  scale: [0, 1, 0],
+                  opacity: [0, 1, 0],
+                  x: Math.cos((i * Math.PI * 2) / 8) * 60,
+                  y: Math.sin((i * Math.PI * 2) / 8) * 60,
+                }}
+                transition={{
+                  duration: 1.5,
+                  delay: 1.2 + (i * 0.1),
+                  ease: "easeOut"
+                }}
+                className="absolute top-1/2 left-1/2 w-2 h-2 bg-gold rounded-full"
+                style={{
+                  boxShadow: '0 0 10px 2px rgba(212, 175, 55, 0.8)'
+                }}
+              />
+            ))}
+            
+            <Scale className="w-24 h-24 md:w-32 md:h-32 text-gold relative z-10" strokeWidth={1.5} />
+          </div>
+        </motion.div>
+
+        {/* Logo Text */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="text-3xl md:text-5xl font-bold text-gold mb-4"
+          style={{ fontFamily: 'Garamond, Georgia, serif' }}
+        >
+          Avukat Halil Pektaş
+        </motion.div>
+
+        {/* Slogan with dramatic entrance */}
+        <AnimatePresence>
+          {showSlogan && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-2"
+            >
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="text-xl md:text-2xl text-white font-semibold"
+              >
+                Adalet
+              </motion.p>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto"
+              />
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="text-gray-400 text-sm md:text-base"
+              >
+                Güven • Deneyim • Başarı
+              </motion.p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Bottom shine effect */}
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 0.3, y: 0 }}
+        transition={{ delay: 1, duration: 1 }}
+        className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gold/20 to-transparent"
+      />
+    </motion.div>
+  )
+}
 
 // Counter Component
 function Counter({ end, duration = 2000, suffix = "" }) {
@@ -52,6 +229,7 @@ function Counter({ end, duration = 2000, suffix = "" }) {
 }
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
@@ -59,6 +237,19 @@ function App() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [selectedService, setSelectedService] = useState(null)
   const fullText = 'Avukat Halil Pektaş'
+
+  // Check if splash screen should be shown
+  useEffect(() => {
+    const hasSeenSplash = localStorage.getItem('hasSeenSplash')
+    if (hasSeenSplash) {
+      setShowSplash(false)
+    }
+  }, [])
+
+  const handleSplashComplete = () => {
+    localStorage.setItem('hasSeenSplash', 'true')
+    setShowSplash(false)
+  }
 
   // Services Data
   const services = [
@@ -295,8 +486,14 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
   }, [testimonials.length])
 
   return (
-    <div className="min-h-screen bg-dark">
-      {/* Scroll Progress Bar */}
+    <>
+      {/* Splash Screen */}
+      <AnimatePresence>
+        {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
+      </AnimatePresence>
+
+      <div className="min-h-screen bg-dark">
+        {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-gray-900 z-[60]">
         <div 
           className="h-full bg-gradient-to-r from-gold via-gold-light to-gold transition-all duration-300"
@@ -905,7 +1102,8 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
           </div>
         </div>
       </a>
-    </div>
+      </div>
+    </>
   )
 }
 
