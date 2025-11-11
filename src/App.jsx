@@ -650,7 +650,7 @@ function App() {
               <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6 mt-8">
                 <h3 className="text-white font-semibold mb-3 text-lg">Çalışma Saatleri</h3>
                 <div className="space-y-2 text-gray-400">
-                  <p>Pazartesi - Cuma: 09:00 - 18:00</p>
+                  <p>Pazartesi - Cuma: 08:00 - 18:00</p>
                   <p>Cumartesi: 09:00 - 13:00</p>
                   <p>Pazar: Kapalı</p>
                 </div>
