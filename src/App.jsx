@@ -661,10 +661,14 @@ function App() {
                 href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, hukuki danışmanlık almak istiyorum.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 flex items-center justify-center gap-3 bg-gold text-black px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform w-full"
+                className="mt-6 flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-[#25D366]/30 shadow-lg shadow-[#25D366]/20 hover:shadow-xl hover:shadow-[#25D366]/40"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.2) 0%, rgba(37, 211, 102, 0.3) 100%)',
+                  color: '#25D366'
+                }}
               >
                 <MessageCircle className="w-6 h-6" />
-                WhatsApp ile İletişime Geçin
+                <span className="text-white font-bold">WhatsApp ile İletişime Geçin</span>
               </a>
             </div>
             
@@ -688,10 +692,14 @@ function App() {
                 href="https://www.google.com/maps/dir/?api=1&destination=39.091038,33.079296"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 bg-gold text-black px-8 py-4 rounded-lg font-semibold hover:scale-105 transition-transform w-full"
+                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-gold/45 shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/50"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.45) 100%)',
+                  color: '#d4af37'
+                }}
               >
                 <Navigation className="w-6 h-6" />
-                Yol Tarifi Al
+                <span className="text-white font-bold">Yol Tarifi Al</span>
               </a>
             </div>
           </div>
