@@ -25,7 +25,13 @@
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -45,6 +51,19 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: #d4af37 #0a0a0a;
+}
+
+/* Prevent horizontal scroll on mobile */
+body {
+  overflow-x: hidden;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }
 
 /* Wave Animation */

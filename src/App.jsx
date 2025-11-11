@@ -511,6 +511,30 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
     return () => clearInterval(timer)
   }, [testimonials.length])
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
+
+  // Prevent body scroll when service modal is open
+  useEffect(() => {
+    if (selectedService) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedService])
+
   return (
     <>
       {/* Splash Screen */}
@@ -591,57 +615,65 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
         </div>
 
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-black/95 backdrop-blur-lg border-t border-gold/20">
-            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-              <Link 
-                to="hero" 
-                smooth={true} 
-                duration={500}
-                className="text-white hover:text-gold transition-colors cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Ana Sayfa
-              </Link>
-              <Link 
-                to="hakkimizda" 
-                smooth={true} 
-                duration={500}
-                className="text-white hover:text-gold transition-colors cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Hakkımızda
-              </Link>
-              <Link 
-                to="hizmetler" 
-                smooth={true} 
-                duration={500}
-                className="text-white hover:text-gold transition-colors cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Hizmetler
-              </Link>
-              <Link 
-                to="referanslar" 
-                smooth={true} 
-                duration={500}
-                className="text-white hover:text-gold transition-colors cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Referanslar
-              </Link>
-              <Link 
-                to="iletisim" 
-                smooth={true} 
-                duration={500}
-                className="text-white hover:text-gold transition-colors cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                İletişim
-              </Link>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden bg-black/95 backdrop-blur-lg border-t border-gold/20 overflow-hidden"
+            >
+              <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <Link 
+                  to="hero" 
+                  smooth={true} 
+                  duration={500}
+                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Ana Sayfa
+                </Link>
+                <Link 
+                  to="hakkimizda" 
+                  smooth={true} 
+                  duration={500}
+                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Hakkımızda
+                </Link>
+                <Link 
+                  to="hizmetler" 
+                  smooth={true} 
+                  duration={500}
+                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Hizmetler
+                </Link>
+                <Link 
+                  to="referanslar" 
+                  smooth={true} 
+                  duration={500}
+                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Referanslar
+                </Link>
+                <Link 
+                  to="iletisim" 
+                  smooth={true} 
+                  duration={500}
+                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  İletişim
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
       
       {/* Hero Section */}
@@ -671,11 +703,11 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-2xl sm:text-3xl md:text-5xl font-bold text-gold mb-8 leading-tight px-2"
+            className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gold mb-6 md:mb-8 leading-tight px-2"
             style={{ fontFamily: 'Garamond, Georgia, serif' }}
           >
             "Profesyonel Yaklaşım, Güvenilir Danışmanlık' {' '}
-            <span className="text-white text-lg sm:text-xl md:text-3xl wave-text block mt-4">
+            <span className="text-white text-base sm:text-lg md:text-2xl lg:text-3xl wave-text block mt-3 md:mt-4">
               {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
                 <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
               ))}
@@ -993,23 +1025,23 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
               </div>
 
               {/* WhatsApp CTA Button */}
-              <div className="mt-8 bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 backdrop-blur-lg border border-[#25D366]/30 rounded-2xl p-6 shadow-xl shadow-[#25D366]/20">
-                <div className="text-center mb-4">
-                  <h3 className="text-2xl font-bold text-white mb-2">Ücretsiz Ön Görüşme</h3>
-                  <p className="text-gray-300 text-sm">Hukuki sorunlarınız için hemen danışın</p>
+              <div className="mt-6 sm:mt-8 bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 backdrop-blur-lg border border-[#25D366]/30 rounded-2xl p-4 sm:p-6 shadow-xl shadow-[#25D366]/20">
+                <div className="text-center mb-3 sm:mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">Ücretsiz Ön Görüşme</h3>
+                  <p className="text-gray-300 text-xs sm:text-sm">Hukuki sorunlarınız için hemen danışın</p>
                 </div>
                 <a
                   href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 px-9 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none"
+                  className="flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-9 py-3 sm:py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none text-sm sm:text-base"
                   style={{ 
                     background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
                     color: '#fff'
                   }}
                 >
-                  <MessageCircle className="w-6 h-6" />
-                  <span className="text-lg">WhatsApp ile Hemen Başlayın</span>
+                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="text-sm sm:text-base lg:text-lg">WhatsApp ile Hemen Başlayın</span>
                 </a>
               </div>
             </div>
@@ -1034,13 +1066,13 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
                 href="https://www.google.com/maps/dir/?api=1&destination=39.091038,33.079296"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-gold/45 shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/50"
+                className="flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-gold/45 shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/50 text-sm sm:text-base"
                 style={{ 
                   background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.45) 100%)',
                   color: '#d4af37'
                 }}
               >
-                <Navigation className="w-6 h-6" />
+                <Navigation className="w-5 h-5 sm:w-6 sm:h-6" />
                 <span className="text-white font-bold">Yol Tarifi Al</span>
               </a>
             </div>
@@ -1051,47 +1083,47 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
       {/* Service Detail Modal */}
       {selectedService && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
           onClick={() => setSelectedService(null)}
         >
           <div 
-            className="bg-gradient-to-b from-gray-900 to-black border-2 border-gold/30 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl shadow-gold/20"
+            className="bg-gradient-to-b from-gray-900 to-black border-2 border-gold/30 rounded-2xl max-w-2xl w-full my-4 shadow-2xl shadow-gold/20 max-h-[90vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="sticky top-0 bg-gradient-to-r from-gold/20 to-gold/10 backdrop-blur-md border-b border-gold/30 p-6 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                {selectedService.icon && <selectedService.icon className="w-8 h-8 text-gold" />}
-                <h3 className="text-2xl md:text-3xl font-bold text-white">{selectedService.title}</h3>
+            <div className="sticky top-0 bg-gradient-to-r from-gold/20 to-gold/10 backdrop-blur-md border-b border-gold/30 p-4 sm:p-6 flex items-center justify-between flex-shrink-0">
+              <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                {selectedService.icon && <selectedService.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gold flex-shrink-0" />}
+                <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white truncate">{selectedService.title}</h3>
               </div>
               <button
                 onClick={() => setSelectedService(null)}
-                className="text-gold hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
+                className="text-gold hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg flex-shrink-0 ml-2"
                 aria-label="Kapat"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
 
-            {/* Content */}
-            <div className="p-6 md:p-8">
-              <p className="text-gray-300 leading-relaxed whitespace-pre-line text-base md:text-lg">
+            {/* Content - Scrollable */}
+            <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1">
+              <p className="text-gray-300 leading-relaxed whitespace-pre-line text-sm sm:text-base md:text-lg">
                 {selectedService.detailedInfo}
               </p>
 
               {/* CTA Button */}
-              <div className="mt-8 pt-6 border-t border-gold/20">
+              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gold/20">
                 <a
                   href={`https://wa.me/+905325648295?text=Merhaba, ${selectedService.title} hakkında bilgi almak istiyorum.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50"
+                  className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 text-sm sm:text-base"
                   style={{ 
                     background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
                     color: '#fff'
                   }}
                 >
-                  <MessageCircle className="w-6 h-6" />
+                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
                   <span>WhatsApp ile Danışın</span>
                 </a>
               </div>
@@ -1114,7 +1146,7 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
         href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 group"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group"
         aria-label="Ücretsiz ön görüşme için WhatsApp"
       >
         <div className="relative">
@@ -1122,9 +1154,9 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
           <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-75"></div>
           
           {/* Main Button */}
-          <div className="relative flex items-center gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">
-            <MessageCircle className="w-6 h-6" />
-            <span className="hidden sm:block font-bold text-sm whitespace-nowrap">Ücretsiz Ön Görüşme</span>
+          <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-3 sm:px-6 sm:py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">
+            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+            <span className="hidden sm:block font-bold text-xs sm:text-sm whitespace-nowrap">Ücretsiz Ön Görüşme</span>
           </div>
         </div>
       </a>
