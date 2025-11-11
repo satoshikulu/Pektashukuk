@@ -57,6 +57,7 @@ function App() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [typewriterText, setTypewriterText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
+  const [selectedService, setSelectedService] = useState(null)
   const fullText = 'Avukat Halil Pektaş'
 
   // Services Data
@@ -65,37 +66,145 @@ function App() {
       id: 1,
       title: "Aile Hukuku",
       description: "Boşanma, velayet, nafaka ve aile içi hukuki sorunlarda uzman destek",
-      icon: Scale
+      icon: Scale,
+      detailedInfo: `Aile Hukuku Nedir?
+
+Aile hukuku; evlilik birliği, eşlerin hak ve yükümlülükleri, boşanma, mal rejimi, velayet, nafaka ve evlat edinme gibi konuları kapsar.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• Anlaşmalı ve çekişmeli boşanma davaları
+• Velayet ve kişisel ilişki düzenlenmesi
+• Nafaka tespiti veya artırımı
+• Mal paylaşımı davaları
+• Aile içi şiddet ve koruma tedbirleri
+• Evlat edinme ve soybağı davaları
+
+gibi konularda müvekkillerimize uzman hukuki destek sunuyoruz.
+
+Her dava kendine özgüdür. Bu nedenle her müvekkilimiz için kişiye özel çözüm stratejileri geliştiriyoruz.
+
+🕊️ Ailede huzurun, hukuki güvenceyle korunması için yanınızdayız.`
     },
     {
       id: 2,
       title: "Ticaret Hukuku",
       description: "Şirket kuruluşu, ticari sözleşmeler ve ticari uyuşmazlıklarda danışmanlık",
-      icon: Briefcase
+      icon: Briefcase,
+      detailedInfo: `Ticaret Hukuku Nedir?
+
+Ticaret hukuku; şirketlerin kuruluşundan faaliyetlerine, ticari sözleşmelerden ortaklık ilişkilerine kadar tüm ticari işlemleri düzenleyen hukuk dalıdır. İş dünyasının güvenli ve sürdürülebilir şekilde ilerlemesi için sağlam bir hukuki zemine ihtiyaç duyulur.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• Şirket kuruluşu ve tür değişikliği işlemleri
+• Ticari sözleşmelerin hazırlanması ve incelenmesi
+• Ortaklık, birleşme ve devralma süreçleri
+• Ticari alacak takibi ve tahsilat davaları
+• Haksız rekabet ve marka ihlalleri
+• Ticari uyuşmazlıkların çözümü ve arabuluculuk
+
+gibi alanlarda müvekkillerimize kapsamlı hukuki danışmanlık ve temsil hizmeti sunuyoruz.
+
+Her işletmenin yapısı farklıdır — biz de her müvekkilimizin ticari hedeflerine uygun stratejik, pratik ve sonuç odaklı çözümler geliştiriyoruz.
+
+⚖️ Ticari hayatta güven, doğru hukuki rehberlikle başlar.`
     },
     {
       id: 3,
       title: "Ceza Hukuku",
       description: "Ceza davalarında savunma ve mağdur hakları konusunda temsil",
-      icon: Gavel
+      icon: Gavel,
+      detailedInfo: `Ceza Hukuku Nedir?
+
+Ceza hukuku; toplum düzenini korumak amacıyla suç teşkil eden fiilleri, bu fiillere uygulanacak yaptırımları ve bireylerin ceza yargılamasındaki haklarını düzenleyen hukuk dalıdır. Hem sanığın savunma hakkı hem de mağdurun adalet arayışı bu alanın temelini oluşturur.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• Soruşturma ve kovuşturma aşamalarında savunma
+• Gözaltı, tutuklama ve ifade süreçlerinde hukuki destek
+• Mağdur ve müşteki vekilliği
+• Ağır Ceza ve Asliye Ceza davaları
+• Trafik, mala zarar, tehdit, hakaret, dolandırıcılık ve benzeri suçlar
+• Hükmün açıklanmasının geri bırakılması (HAGB) ve cezanın ertelenmesi işlemleri
+
+gibi konularda müvekkillerimize etkin, titiz ve hak temelli bir hukuki temsil sunuyoruz.
+
+Ceza yargılamasında her detay önemlidir. Biz, her dosyada adaletin sağlanması için güçlü bir savunma ve bilinçli bir yaklaşım benimsiyoruz.
+
+⚖️ Adalet arayışınızda, hukuki güvenceniz biziz.`
     },
     {
       id: 4,
       title: "İcra İflas Hukuku",
       description: "Alacak tahsilatı, icra takipleri ve iflas süreçlerinde hukuki destek",
-      icon: FileText
+      icon: FileText,
+      detailedInfo: `İcra ve İflas Hukuku Nedir?
+
+İcra ve iflas hukuku; borçların tahsili, alacakların korunması, cebri icra işlemleri ve iflas süreçlerini düzenleyen hukuk dalıdır. Hem alacaklının haklarını güvence altına almak hem de borçlunun yasal haklarını belirlemek bu alanın temel amacıdır.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• İlamsız ve ilamlı icra takipleri
+• Kambiyo senetlerine dayalı takipler (çek, senet, bono)
+• İtirazın kaldırılması ve iptali davaları
+• Haciz işlemleri ve malların satış süreci
+• İflas davaları ve konkordato işlemleri
+• Alacak tahsili ve borç yapılandırma süreçleri
+
+gibi konularda müvekkillerimize hızlı, etkin ve sonuç odaklı hukuki destek sunuyoruz.
+
+Her alacak kendi sürecine sahiptir; biz, müvekkillerimizin haklarını korumak ve süreçleri en güvenli şekilde yönetmek için yanınızdayız.
+
+💼 Alacaklarınızı güvenle tahsil edin, hukuki süreci profesyonellere bırakın.`
     },
     {
       id: 5,
       title: "İş Hukuku",
       description: "İşçi-işveren uyuşmazlıkları, iş sözleşmeleri ve tazminat davaları",
-      icon: Users
+      icon: Users,
+      detailedInfo: `İş Hukuku Nedir?
+
+İş hukuku; işçi ve işveren arasındaki ilişkileri düzenleyen, çalışma hayatında adalet ve dengeyi sağlamayı amaçlayan hukuk dalıdır. İşe girişten feshe, tazminatlardan iş güvenliğine kadar pek çok konuyu kapsar.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• İşe iade davaları
+• Kıdem ve ihbar tazminatı talepleri
+• Fazla mesai, yıllık izin ve ücret alacakları
+• Haksız fesih ve mobbing davaları
+• Hizmet tespiti ve sigorta prim uyuşmazlıkları
+• İş kazası ve meslek hastalığı tazminatları
+
+gibi konularda müvekkillerimize çalışma hayatında haklarını koruyacak etkili hukuki destek sunuyoruz.
+
+Her iş ilişkisi kendi koşullarına sahiptir; bu nedenle her müvekkilimize özel bir hukuki strateji belirliyoruz.
+
+💼 Emek sizin, hakkınızı korumak bizim görevimiz.`
     },
     {
       id: 6,
       title: "Gayrimenkul Hukuku",
       description: "Tapu işlemleri, kira sözleşmeleri ve gayrimenkul uyuşmazlıkları",
-      icon: Home
+      icon: Home,
+      detailedInfo: `Miras Hukuku Nedir?
+
+Miras hukuku; bir kişinin vefatı sonrası malvarlığının kimlere, hangi oranlarda ve nasıl intikal edeceğini düzenleyen hukuk dalıdır. Bu alan, aile içi hakların korunması ve adil paylaşımın sağlanması açısından büyük önem taşır.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• Miras paylaşımı ve tereke tespiti davaları
+• Vasiyetname hazırlanması ve iptali
+• Saklı payın korunması davaları
+• Mirastan feragat ve reddi miras işlemleri
+• Ortaklığın giderilmesi (izale-i şuyu) davaları
+• Veraset belgesi (mirasçılık belgesi) alınması
+
+gibi konularda müvekkillerimize hukuki güvenceyle destek sağlıyoruz.
+
+Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Biz, bu süreci adaletli, saygılı ve çözüm odaklı bir yaklaşımla yürütüyoruz.
+
+🌿 Miras, bir hakkın devridir; biz, o hakkın korunmasını sağlıyoruz.`
     }
   ]
 
@@ -503,7 +612,8 @@ function App() {
               return (
                 <div
                   key={service.id}
-                  className="group bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6 hover:scale-105 hover:border-gold/50 transition-all duration-300 hover:shadow-2xl hover:shadow-gold/20"
+                  onClick={() => service.detailedInfo && setSelectedService(service)}
+                  className="group bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6 hover:scale-105 hover:border-gold hover:bg-white/10 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] shadow-lg shadow-gold/10 cursor-pointer"
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
                 >
@@ -714,6 +824,58 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Service Detail Modal */}
+      {selectedService && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+          onClick={() => setSelectedService(null)}
+        >
+          <div 
+            className="bg-gradient-to-b from-gray-900 to-black border-2 border-gold/30 rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl shadow-gold/20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="sticky top-0 bg-gradient-to-r from-gold/20 to-gold/10 backdrop-blur-md border-b border-gold/30 p-6 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                {selectedService.icon && <selectedService.icon className="w-8 h-8 text-gold" />}
+                <h3 className="text-2xl md:text-3xl font-bold text-white">{selectedService.title}</h3>
+              </div>
+              <button
+                onClick={() => setSelectedService(null)}
+                className="text-gold hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
+                aria-label="Kapat"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 md:p-8">
+              <p className="text-gray-300 leading-relaxed whitespace-pre-line text-base md:text-lg">
+                {selectedService.detailedInfo}
+              </p>
+
+              {/* CTA Button */}
+              <div className="mt-8 pt-6 border-t border-gold/20">
+                <a
+                  href={`https://wa.me/+905325648295?text=Merhaba, ${selectedService.title} hakkında bilgi almak istiyorum.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 px-6 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50"
+                  style={{ 
+                    background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
+                    color: '#fff'
+                  }}
+                >
+                  <MessageCircle className="w-6 h-6" />
+                  <span>WhatsApp ile Danışın</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       
       {/* Footer */}
       <footer className="bg-black border-t border-gold/20 py-8">
