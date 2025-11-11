@@ -325,7 +325,7 @@ function App() {
           }}
         >
           {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/85 to-gray-900/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/65 to-gray-900/70"></div>
           {/* Gold Overlay for warmth */}
           <div className="absolute inset-0 bg-gold/5"></div>
         </div>
@@ -339,7 +339,7 @@ function App() {
             className="text-2xl sm:text-3xl md:text-5xl font-bold text-gold mb-8 leading-tight px-2"
             style={{ fontFamily: 'Garamond, Georgia, serif' }}
           >
-            "Profesyonel Yaklaşım, Güvenilir Danışmanlık''' {' '}
+            "Profesyonel Yaklaşım, Güvenilir Danışmanlık' {' '}
             <span className="text-white text-lg sm:text-xl md:text-3xl wave-text block mt-4">
               {"''Haklarınız İçin Etkili Savunma.\"".split('').map((char, index) => (
                 <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
@@ -455,7 +455,7 @@ function App() {
               data-aos-delay="100"
             >
               <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
-                <Counter end={15} suffix="+" />
+                <Counter end={20} suffix="+" />
               </div>
               <p className="text-xl text-gray-300 font-semibold">Yıl Deneyim</p>
               <p className="text-sm text-gray-500 mt-2">Hukuk alanında uzmanlık</p>
