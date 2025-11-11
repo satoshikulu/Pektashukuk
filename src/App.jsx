@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Menu, X, Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, Phone, Mail, MessageCircle, Navigation } from 'lucide-react'
 import { Link } from 'react-scroll'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,17 +8,27 @@ function SplashScreen({ onComplete }) {
   const [showSlogan, setShowSlogan] = useState(false)
 
   useEffect(() => {
+    console.log('SplashScreen mounted, onComplete type:', typeof onComplete)
+    
     // Show slogan after scale animation
     const sloganTimer = setTimeout(() => {
+      console.log('Showing slogan')
       setShowSlogan(true)
     }, 2000)
 
     // Complete splash screen after 5 seconds
     const completeTimer = setTimeout(() => {
-      onComplete()
+      console.log('5 seconds passed, calling onComplete')
+      if (typeof onComplete === 'function') {
+        onComplete()
+        console.log('onComplete called successfully')
+      } else {
+        console.error('onComplete is not a function!', onComplete)
+      }
     }, 5000)
 
     return () => {
+      console.log('SplashScreen unmounting')
       clearTimeout(sloganTimer)
       clearTimeout(completeTimer)
     }
@@ -169,6 +179,20 @@ function SplashScreen({ onComplete }) {
         </AnimatePresence>
       </div>
 
+      {/* Skip Button */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        onClick={() => {
+          console.log('Skip button clicked')
+          onComplete()
+        }}
+        className="absolute bottom-8 right-8 text-gold hover:text-white transition-colors text-sm border border-gold/30 px-4 py-2 rounded-lg hover:bg-gold/10"
+      >
+        Geç →
+      </motion.button>
+
       {/* Bottom shine effect */}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -246,10 +270,12 @@ function App() {
     }
   }, [])
 
-  const handleSplashComplete = () => {
+  const handleSplashComplete = useCallback(() => {
+    console.log('Splash screen completing...')
     localStorage.setItem('hasSeenSplash', 'true')
     setShowSplash(false)
-  }
+    console.log('Splash screen hidden')
+  }, [])
 
   // Services Data
   const services = [
