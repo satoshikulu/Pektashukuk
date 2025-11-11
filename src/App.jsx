@@ -3,6 +3,83 @@ import { Menu, X, Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, 
 import { Link } from 'react-scroll'
 import { motion } from 'framer-motion'
 
+// Google Map Component
+function GoogleMap({ lat, lng, address }) {
+  const mapRef = useRef(null)
+  const mapInstanceRef = useRef(null)
+
+  useEffect(() => {
+    if (!mapRef.current || !window.google) return
+
+    // Initialize map
+    const map = new window.google.maps.Map(mapRef.current, {
+      center: { lat, lng },
+      zoom: 16,
+      styles: [
+        {
+          featureType: "all",
+          elementType: "geometry",
+          stylers: [{ color: "#242f3e" }]
+        },
+        {
+          featureType: "all",
+          elementType: "labels.text.stroke",
+          stylers: [{ color: "#242f3e" }]
+        },
+        {
+          featureType: "all",
+          elementType: "labels.text.fill",
+          stylers: [{ color: "#746855" }]
+        },
+        {
+          featureType: "water",
+          elementType: "geometry",
+          stylers: [{ color: "#17263c" }]
+        }
+      ]
+    })
+
+    // Add marker
+    const marker = new window.google.maps.Marker({
+      position: { lat, lng },
+      map: map,
+      title: address,
+      animation: window.google.maps.Animation.DROP
+    })
+
+    // Add info window
+    const infoWindow = new window.google.maps.InfoWindow({
+      content: `
+        <div style="padding: 10px; color: #000;">
+          <h3 style="margin: 0 0 10px 0; font-weight: bold;">Av. Halil Pektaş Hukuk Bürosu</h3>
+          <p style="margin: 0 0 10px 0;">${address}</p>
+          <a 
+            href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}" 
+            target="_blank"
+            rel="noopener noreferrer"
+            style="display: inline-block; background: #d4af37; color: #000; padding: 8px 16px; text-decoration: none; border-radius: 4px; font-weight: bold;"
+          >
+            Yol Tarifi Al
+          </a>
+        </div>
+      `
+    })
+
+    marker.addListener('click', () => {
+      infoWindow.open(map, marker)
+    })
+
+    // Auto open info window
+    setTimeout(() => {
+      infoWindow.open(map, marker)
+    }, 500)
+
+    mapInstanceRef.current = map
+  }, [lat, lng, address])
+
+  return <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '400px', borderRadius: '1rem' }} />
+}
+
 // Counter Component
 function Counter({ end, duration = 2000, suffix = "" }) {
   const [count, setCount] = useState(0)
@@ -199,7 +276,7 @@ function App() {
       <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gold/20 mt-1">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           {/* Logo */}
-          <div className="text-2xl font-bold text-gold" style={{ fontFamily: 'Walbaum, Didot, Georgia, serif' }}>
+          <div className="text-lg sm:text-xl md:text-2xl font-bold text-gold" style={{ fontFamily: 'Walbaum, Didot, Georgia, serif' }}>
             {typewriterText}
             <span className="animate-pulse">|</span>
           </div>
@@ -319,12 +396,9 @@ function App() {
       >
         {/* Background Image with Overlay */}
         <div 
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 bg-cover bg-center md:bg-fixed"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'fixed'
+            backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)'
           }}
         >
           {/* Dark Overlay */}
@@ -339,11 +413,11 @@ function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-5xl font-bold text-gold mb-8 leading-tight"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold text-gold mb-8 leading-tight px-2"
             style={{ fontFamily: 'Garamond, Georgia, serif' }}
           >
             "Profesyonel Yaklaşım, Güvenilir Danışmanlık''' {' '}
-            <span className="text-white text-xl md:text-3xl wave-text">
+            <span className="text-white text-lg sm:text-xl md:text-3xl wave-text block mt-4">
               {"''Haklarınız İçin Etkili Savunma.\"".split('').map((char, index) => (
                 <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
               ))}
@@ -382,7 +456,7 @@ function App() {
       <section id="hakkimizda" className="py-16 md:py-24 bg-dark" style={{ fontFamily: 'Montserrat, sans-serif' }}>
         <div className="container mx-auto px-4">
           <h2 
-            className="text-4xl md:text-5xl font-bold text-center text-white mb-12"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-12"
             data-aos="fade-up"
             style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
           >
@@ -483,7 +557,7 @@ function App() {
       <section id="hizmetler" className="py-16 md:py-24 bg-gradient-to-b from-dark to-gray-900">
         <div className="container mx-auto px-4">
           <h2 
-            className="text-4xl md:text-5xl font-bold text-center text-white mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
             data-aos="fade-up"
             style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
           >
@@ -527,7 +601,7 @@ function App() {
       <section id="referanslar" className="py-16 md:py-24 bg-dark">
         <div className="container mx-auto px-4">
           <h2 
-            className="text-4xl md:text-5xl font-bold text-center text-white mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
             data-aos="fade-up"
             style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
           >
@@ -591,7 +665,7 @@ function App() {
       <section id="iletisim" className="py-16 md:py-24 bg-gradient-to-b from-dark to-gray-900">
         <div className="container mx-auto px-4">
           <h2 
-            className="text-4xl md:text-5xl font-bold text-center text-white mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
             data-aos="fade-up"
             style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
           >
@@ -674,15 +748,10 @@ function App() {
             {/* Google Maps */}
             <div data-aos="fade-left">
               <div className="rounded-2xl overflow-hidden border border-gold/20 h-96 lg:h-full min-h-[400px]">
-                <iframe
-                  src={contactInfo.mapEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Av. Halil Pektaş Hukuk Bürosu Konum"
+                <GoogleMap 
+                  lat={39.091038}
+                  lng={33.079296}
+                  address={`${contactInfo.address.street}, ${contactInfo.address.building}, ${contactInfo.address.postalCode} ${contactInfo.address.city}/${contactInfo.address.province}`}
                 />
               </div>
             </div>
