@@ -453,7 +453,7 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
           >
             "Profesyonel Yaklaşım, Güvenilir Danışmanlık' {' '}
             <span className="text-white text-lg sm:text-xl md:text-3xl wave-text block mt-4">
-              {"''Haklarınız İçin Etkili Savunma.\"".split('').map((char, index) => (
+              {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
                 <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
               ))}
             </span>
