@@ -318,12 +318,15 @@ function App() {
         className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
       >
         {/* Background Image with Overlay */}
-        <div 
-          className="absolute inset-0 z-0 bg-cover bg-center md:bg-fixed"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)'
-          }}
-        >
+        <div className="absolute inset-0 z-0">
+          {/* Animated Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center hero-bg-animated"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)'
+            }}
+          ></div>
+          
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/65 to-gray-900/70"></div>
           {/* Gold Overlay for warmth */}
@@ -666,13 +669,13 @@ function App() {
                   href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none"
+                  className="flex items-center justify-center gap-3 px-9 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none"
                   style={{ 
                     background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
                     color: '#fff'
                   }}
                 >
-                  <MessageCircle className="w-7 h-7" />
+                  <MessageCircle className="w-6 h-6" />
                   <span className="text-lg">WhatsApp ile Hemen Başlayın</span>
                 </a>
               </div>
