@@ -656,20 +656,26 @@ function App() {
                 </div>
               </div>
 
-              {/* WhatsApp Button */}
-              <a
-                href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, hukuki danışmanlık almak istiyorum.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-[#25D366]/30 shadow-lg shadow-[#25D366]/20 hover:shadow-xl hover:shadow-[#25D366]/40"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.2) 0%, rgba(37, 211, 102, 0.3) 100%)',
-                  color: '#25D366'
-                }}
-              >
-                <MessageCircle className="w-6 h-6" />
-                <span className="text-white font-bold">WhatsApp ile İletişime Geçin</span>
-              </a>
+              {/* WhatsApp CTA Button */}
+              <div className="mt-8 bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 backdrop-blur-lg border border-[#25D366]/30 rounded-2xl p-6 shadow-xl shadow-[#25D366]/20">
+                <div className="text-center mb-4">
+                  <h3 className="text-2xl font-bold text-white mb-2">Ücretsiz Ön Görüşme</h3>
+                  <p className="text-gray-300 text-sm">Hukuki sorunlarınız için hemen danışın</p>
+                </div>
+                <a
+                  href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none"
+                  style={{ 
+                    background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
+                    color: '#fff'
+                  }}
+                >
+                  <MessageCircle className="w-7 h-7" />
+                  <span className="text-lg">WhatsApp ile Hemen Başlayın</span>
+                </a>
+              </div>
             </div>
             
             {/* Google Maps */}
@@ -715,15 +721,24 @@ function App() {
         </div>
       </footer>
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp CTA Button */}
       <a
-        href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, hukuki danışmanlık almak istiyorum.`}
+        href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform animate-pulse hover:animate-none"
-        aria-label="WhatsApp ile iletişime geç"
+        className="fixed bottom-6 right-6 z-50 group"
+        aria-label="Ücretsiz ön görüşme için WhatsApp"
       >
-        <MessageCircle className="w-7 h-7" />
+        <div className="relative">
+          {/* Pulse Animation Ring */}
+          <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-75"></div>
+          
+          {/* Main Button */}
+          <div className="relative flex items-center gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-6 py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">
+            <MessageCircle className="w-6 h-6" />
+            <span className="hidden sm:block font-bold text-sm whitespace-nowrap">Ücretsiz Ön Görüşme</span>
+          </div>
+        </div>
       </a>
     </div>
   )
