@@ -518,7 +518,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
   // Typewriter Effect
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100
-    const pauseTime = isDeleting ? 500 : 2000
+    const pauseTime = isDeleting ? 500 : 10000 // 10 saniye bekleme süresi
 
     const timer = setTimeout(() => {
       if (!isDeleting && typewriterText === fullText) {
