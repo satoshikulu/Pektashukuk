@@ -876,8 +876,25 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       </section>
       
       {/* Services Section */}
-      <section id="hizmetler" className="py-16 md:py-24 bg-gradient-to-b from-dark to-gray-900">
-        <div className="container mx-auto px-4">
+      <section id="hizmetler" className="relative py-16 md:py-24 overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          {/* Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop)'
+            }}
+          ></div>
+          
+          {/* Dark Overlay - %10 daha koyu */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/88 to-gray-900/90"></div>
+          {/* Gold Overlay for warmth */}
+          <div className="absolute inset-0 bg-gold/10"></div>
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 relative z-10">
           <h2 
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
             data-aos="fade-up"
