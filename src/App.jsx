@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Menu, X, Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, Phone, Mail, MessageCircle, Navigation } from 'lucide-react'
+import { Menu, X, Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, Phone, Mail, MessageCircle, Navigation, Handshake } from 'lucide-react'
 import { Link } from 'react-scroll'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -422,6 +422,38 @@ gibi konularda müvekkillerimize hukuki güvenceyle destek sağlıyoruz.
 Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Biz, bu süreci adaletli, saygılı ve çözüm odaklı bir yaklaşımla yürütüyoruz.
 
 🌿 Miras, bir hakkın devridir; biz, o hakkın korunmasını sağlıyoruz.`
+    },
+    {
+      id: 7,
+      title: "",
+      description: "",
+      icon: null,
+      detailedInfo: null,
+      hidden: true
+    },
+    {
+      id: 8,
+      title: "Arabuluculuk",
+      description: "Uyuşmazlıkların mahkeme dışı çözümü için profesyonel arabuluculuk hizmeti",
+      icon: Handshake,
+      detailedInfo: `Arabuluculuk Nedir?
+
+Arabuluculuk; taraflar arasındaki uyuşmazlıkların, mahkeme sürecine gitmeden, tarafsız bir üçüncü kişinin (arabulucu) yardımıyla çözüme kavuşturulması sürecidir. Hızlı, ekonomik ve gizlilik esasına dayalı bir alternatif uyuşmazlık çözüm yöntemidir.
+
+Av. Halil Pektaş Hukuk Bürosu olarak;
+
+• Ticari uyuşmazlıklarda arabuluculuk
+• İş hukuku uyuşmazlıklarında zorunlu arabuluculuk
+• Tüketici uyuşmazlıklarında arabuluculuk
+• Kira ve gayrimenkul uyuşmazlıklarında arabuluculuk
+• Aile içi mali uyuşmazlıklarda arabuluculuk
+• Sözleşmeden kaynaklanan uyuşmazlıklarda arabuluculuk
+
+gibi alanlarda müvekkillerimize profesyonel arabuluculuk hizmeti sunuyoruz.
+
+Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve kazanan-kaybeden yerine kazan-kazan yaklaşımını benimser.
+
+🤝 Uyuşmazlıkları diyalogla çözmek, her zaman en akıllıca yoldur.`
     }
   ]
 
@@ -863,6 +895,11 @@ Her miras dosyası, hem hukuki hem duygusal yönleriyle özel bir süreçtir. Bi
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => {
+              // Skip hidden placeholder cards
+              if (service.hidden) {
+                return <div key={service.id} className="hidden lg:block"></div>
+              }
+              
               const IconComponent = service.icon
               return (
                 <div
