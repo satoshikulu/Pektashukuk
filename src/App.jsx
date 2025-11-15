@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Menu, X, Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, Phone, Mail, MessageCircle, Navigation, Handshake } from 'lucide-react'
+import { Scale, Briefcase, Gavel, FileText, Users, Home, Star, MapPin, Phone, Mail, MessageCircle, Navigation, Handshake } from 'lucide-react'
 import { Link } from 'react-scroll'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Header, ServiceCard, Testimonial, ContactForm } from './components'
 
 // Splash Screen Component - Hukuk Temalı Animasyon
 function SplashScreen({ onComplete }) {
@@ -254,7 +255,6 @@ function Counter({ end, duration = 2000, suffix = "" }) {
 
 function App() {
   const [showSplash, setShowSplash] = useState(true)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [typewriterText, setTypewriterText] = useState('')
@@ -479,6 +479,41 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       rating: 5,
       comment: "İş davamda haklarımı sonuna kadar savundu. Profesyonel yaklaşımı ve samimiyeti ile kesinlikle tavsiye ederim.",
       service: "İş Hukuku"
+    },
+    {
+      id: 4,
+      name: "Ahmet T.",
+      rating: 5,
+      comment: "Ceza davamda gösterdiği çaba ve başarıdan dolayı çok memnunum. Detaylı analizleri ve stratejik yaklaşımı davamı kazandırdı.",
+      service: "Ceza Hukuku"
+    },
+    {
+      id: 5,
+      name: "Elif Ş.",
+      rating: 5,
+      comment: "İcra takibi sırasında profesyonel danışmanlığı ile alacağımı güvence altına aldı. Her konuda yardımcı oldu, teşekkür ederim.",
+      service: "İcra İflas Hukuku"
+    },
+    {
+      id: 6,
+      name: "Mustafa B.",
+      rating: 5,
+      comment: "Gayrimenkul satış sözleşmesindeki sorunumda bana büyük destek oldu. Hukuki süreci detaylı şekilde anlattı ve her zaman ulaşılabilir oldu.",
+      service: "Gayrimenkul Hukuku"
+    },
+    {
+      id: 7,
+      name: "Fatma N.",
+      rating: 5,
+      comment: "Miras paylaşımı konusunda ailemize büyük huzur sağladı. Hem hukuki bilgisi hem de insani yaklaşımı ile çok değerli bir avukat.",
+      service: "Miras Hukuku"
+    },
+    {
+      id: 8,
+      name: "Cumhur K.",
+      rating: 5,
+      comment: "Ticari uyuşmazlığımızda arabuluculuk hizmeti sundu. Taraflar arasında denge kurdu ve anlaşmaya varılmasını sağladı. Çok memnun kaldık.",
+      service: "Arabuluculuk"
     }
   ]
 
@@ -500,7 +535,8 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       link: "+905325648295"
     },
     email: "info@halilpektashukuk.com",
-    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.8157!2d33.079296!3d39.091038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDA1JzI3LjciTiAzM8KwMDQnNDUuNSJF!5e0!3m2!1str!2str!4v1699999999999"
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.8157!2d33.079289!3d39.091067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDA1JzI3LjciTiAzM8KwMDQnNDUuNSJF!5e0!3m2!1str!2str!4v1699999999999",
+    mapCoordinates: "39.091067,33.079289"
   }
 
   // Scroll Progress
@@ -511,7 +547,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       setScrollProgress(progress)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -543,18 +579,6 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
     return () => clearInterval(timer)
   }, [testimonials.length])
 
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isMenuOpen])
-
   // Prevent body scroll when service modal is open
   useEffect(() => {
     if (selectedService) {
@@ -576,644 +600,500 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
 
       <div className="min-h-screen bg-dark">
         {/* Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-900 z-[60]">
-        <div 
-          className="h-full bg-gradient-to-r from-gold via-gold-light to-gold transition-all duration-300"
-          style={{ width: `${scrollProgress}%` }}
-        />
-      </div>
+        <div className="fixed top-0 left-0 w-full h-1 bg-gray-900 z-[60]">
+          <div 
+            className="h-full bg-gradient-to-r from-gold via-gold-light to-gold transition-all duration-300"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
 
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-gold/20 mt-1">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          {/* Logo */}
-          <div className="text-lg sm:text-xl md:text-2xl font-bold text-gold" style={{ fontFamily: 'Walbaum, Didot, Georgia, serif' }}>
-            {typewriterText}
-            <span className="animate-pulse">|</span>
+        {/* Header Component */}
+        <Header typewriterText={typewriterText} />
+
+        {/* Hero Section */}
+        <section 
+          id="hero" 
+          className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+        >
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            {/* Animated Background Image */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center hero-bg-animated"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop'
+              }}
+            ></div>
+            
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/65 to-gray-900/70"></div>
+            {/* Gold Overlay for warmth */}
+            <div className="absolute inset-0 bg-gold/5"></div>
           </div>
           
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex space-x-8">
-            <Link 
-              to="hero" 
-              smooth={true} 
-              duration={500}
-              className="text-white hover:text-gold transition-colors cursor-pointer"
+          {/* Content */}
+          <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gold mb-6 md:mb-8 leading-tight px-2"
+              style={{ fontFamily: 'Garamond, Georgia, serif' }}
             >
-              Ana Sayfa
-            </Link>
-            <Link 
-              to="hakkimizda" 
-              smooth={true} 
-              duration={500}
-              className="text-white hover:text-gold transition-colors cursor-pointer"
+              "Profesyonel Yaklaşım, Güvenilir Danışmanlık' {' '}
+              <span className="text-white text-base sm:text-lg md:text-2xl lg:text-3xl wave-text block mt-3 md:mt-4">
+                {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
+                  <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
+                ))}
+              </span>
+            </motion.h1>
+            
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <Link 
+                to="iletisim" 
+                smooth={true} 
+                duration={500}
+              >
+                <button className="bg-gold text-black px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-transform w-full sm:w-auto">
+                  İletişime Geç
+                </button>
+              </Link>
+              <Link 
+                to="hizmetler" 
+                smooth={true} 
+                duration={500}
+              >
+                <button className="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-all w-full sm:w-auto">
+                  Hizmetlerimiz
+                </button>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+        
+        {/* About Section */}
+        <section id="hakkimizda" className="py-16 md:py-24 bg-dark" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <div className="container mx-auto px-4">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-12"
+              data-aos="fade-up"
+              style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
             >
               Hakkımızda
-            </Link>
-            <Link 
-              to="hizmetler" 
-              smooth={true} 
-              duration={500}
-              className="text-white hover:text-gold transition-colors cursor-pointer"
-            >
-              Hizmetler
-            </Link>
-            <Link 
-              to="referanslar" 
-              smooth={true} 
-              duration={500}
-              className="text-white hover:text-gold transition-colors cursor-pointer"
-            >
-              Referanslar
-            </Link>
-            <Link 
-              to="iletisim" 
-              smooth={true} 
-              duration={500}
-              className="text-white hover:text-gold transition-colors cursor-pointer"
-            >
-              İletişim
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden text-gold"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-black/95 backdrop-blur-lg border-t border-gold/20 overflow-hidden"
-            >
-              <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-                <Link 
-                  to="hero" 
-                  smooth={true} 
-                  duration={500}
-                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Ana Sayfa
-                </Link>
-                <Link 
-                  to="hakkimizda" 
-                  smooth={true} 
-                  duration={500}
-                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Hakkımızda
-                </Link>
-                <Link 
-                  to="hizmetler" 
-                  smooth={true} 
-                  duration={500}
-                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Hizmetler
-                </Link>
-                <Link 
-                  to="referanslar" 
-                  smooth={true} 
-                  duration={500}
-                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Referanslar
-                </Link>
-                <Link 
-                  to="iletisim" 
-                  smooth={true} 
-                  duration={500}
-                  className="text-white hover:text-gold transition-colors cursor-pointer py-2"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  İletişim
-                </Link>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-      
-      {/* Hero Section */}
-      <section 
-        id="hero" 
-        className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
-      >
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          {/* Animated Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center hero-bg-animated"
-            style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)'
-            }}
-          ></div>
-          
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/65 to-gray-900/70"></div>
-          {/* Gold Overlay for warmth */}
-          <div className="absolute inset-0 bg-gold/5"></div>
-        </div>
-        
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gold mb-6 md:mb-8 leading-tight px-2"
-            style={{ fontFamily: 'Garamond, Georgia, serif' }}
-          >
-            "Profesyonel Yaklaşım, Güvenilir Danışmanlık' {' '}
-            <span className="text-white text-base sm:text-lg md:text-2xl lg:text-3xl wave-text block mt-3 md:mt-4">
-              {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
-                <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
-              ))}
-            </span>
-          </motion.h1>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link 
-              to="iletisim" 
-              smooth={true} 
-              duration={500}
-            >
-              <button className="bg-gold text-black px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-transform w-full sm:w-auto">
-                İletişime Geç
-              </button>
-            </Link>
-            <Link 
-              to="hizmetler" 
-              smooth={true} 
-              duration={500}
-            >
-              <button className="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-all w-full sm:w-auto">
-                Hizmetlerimiz
-              </button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-      
-      {/* About Section */}
-      <section id="hakkimizda" className="py-16 md:py-24 bg-dark" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-        <div className="container mx-auto px-4">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-12"
-            data-aos="fade-up"
-            style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
-          >
-            Hakkımızda
-          </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {/* Büro Tanıtımı */}
-            <div data-aos="fade-right">
-              <h3 className="text-2xl font-bold text-gold mb-4">
-                Av. Halil Pektaş Hukuk Bürosu
-              </h3>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                Kulu, Konya'da hizmet veren hukuk büromuz, müvekkillerimize en yüksek kalitede 
-                hukuki danışmanlık ve temsil hizmeti sunmaktadır. Yılların getirdiği deneyim ve 
-                uzmanlıkla, her türlü hukuki sorununuzda yanınızdayız.
-              </p>
-              <p className="text-gray-300 mb-4 leading-relaxed">
-                Av. Halil Pektaş, aile hukuku, ticaret hukuku, ceza hukuku, iş hukuku ve 
-                gayrimenkul hukuku alanlarında uzmanlaşmış olup, müvekkillerinin haklarını 
-                en iyi şekilde korumak için çalışmaktadır.
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                Profesyonel yaklaşımımız, etik değerlerimiz ve müvekkil memnuniyetine verdiğimiz 
-                önem ile hukuki süreçlerinizde güvenilir bir çözüm ortağıyız.
-              </p>
-            </div>
+            </h2>
             
-            {/* Misyon & Vizyon Kartı */}
-            <div data-aos="fade-left">
-              <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-8 h-full">
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gold mb-4">Misyonumuz</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    Müvekkillerimize en yüksek kalitede hukuki hizmet sunmak, haklarını en iyi 
-                    şekilde korumak ve adaletin tecellisi için çalışmak. Etik değerlere bağlı 
-                    kalarak, profesyonel ve güvenilir hukuki danışmanlık sağlamak.
-                  </p>
-                </div>
-                
-                <div>
-                  <h3 className="text-2xl font-bold text-gold mb-4">Vizyonumuz</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    Bölgemizde ve ülkemizde tercih edilen, güvenilir ve saygın bir hukuk bürosu 
-                    olmak. Sürekli gelişim ve yenilikçi yaklaşımlarla hukuk hizmetlerinde 
-                    öncü olmak.
-                  </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              {/* Büro Tanıtımı */}
+              <div data-aos="fade-right">
+                <h3 className="text-2xl font-bold text-gold mb-4">
+                  Av. Halil Pektaş Hukuk Bürosu
+                </h3>
+                <p className="text-gray-300 mb-4 leading-relaxed">
+                  Kulu, Konya'da hizmet veren hukuk büromuz, müvekkillerimize en yüksek kalitede 
+                  hukuki danışmanlık ve temsil hizmeti sunmaktadır. Yılların getirdiği deneyim ve 
+                  uzmanlıkla, her türlü hukuki sorununuzda yanınızdayız.
+                </p>
+                <p className="text-gray-300 mb-4 leading-relaxed">
+                  Av. Halil Pektaş, aile hukuku, ticaret hukuku, ceza hukuku, iş hukuku ve 
+                  gayrimenkul hukuku alanlarında uzmanlaşmış olup, müvekkillerinin haklarını 
+                  en iyi şekilde korumak için çalışmaktadır.
+                </p>
+                <p className="text-gray-300 leading-relaxed">
+                  Profesyonel yaklaşımımız, etik değerlerimiz ve müvekkil memnuniyetine verdiğimiz 
+                  önem ile hukuki süreçlerinizde güvenilir bir çözüm ortağıyız.
+                </p>
+              </div>
+              
+              {/* Misyon & Vizyon Kartı */}
+              <div data-aos="fade-left">
+                <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-8 h-full">
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold text-gold mb-4">Misyonumuz</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      Müvekkillerimize en yüksek kalitede hukuki hizmet sunmak, haklarını en iyi 
+                      şekilde korumak ve adaletin tecellisi için çalışmak. Etik değerlere bağlı 
+                      kalarak, profesyonel ve güvenilir hukuki danışmanlık sağlamak.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-2xl font-bold text-gold mb-4">Vizyonumuz</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      Bölgemizde ve ülkemizde tercih edilen, güvenilir ve saygın bir hukuk bürosu 
+                      olmak. Sürekli gelişim ve yenilikçi yaklaşımlarla hukuk hizmetlerinde 
+                      öncü olmak.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      
-      {/* Statistics Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-b from-dark to-black">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div 
-              className="text-center p-8 bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl hover:scale-105 transition-transform"
-              data-aos="fade-up"
-            >
-              <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
-                <Counter end={500} suffix="+" />
+        </section>
+        
+        {/* Statistics Section */}
+        <section className="py-16 md:py-20 bg-gradient-to-b from-dark to-black">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div 
+                className="text-center p-8 bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl hover:scale-105 transition-transform"
+                data-aos="fade-up"
+              >
+                <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
+                  <Counter end={500} suffix="+" />
+                </div>
+                <p className="text-xl text-gray-300 font-semibold">Başarılı Dava</p>
+                <p className="text-sm text-gray-500 mt-2">Müvekkillerimiz için kazandık</p>
               </div>
-              <p className="text-xl text-gray-300 font-semibold">Başarılı Dava</p>
-              <p className="text-sm text-gray-500 mt-2">Müvekkillerimiz için kazandık</p>
-            </div>
 
+              <div 
+                className="text-center p-8 bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl hover:scale-105 transition-transform"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
+                  <Counter end={20} suffix="+" />
+                </div>
+                <p className="text-xl text-gray-300 font-semibold">Yıl Deneyim</p>
+                <p className="text-sm text-gray-500 mt-2">Hukuk alanında uzmanlık</p>
+              </div>
+
+              <div 
+                className="text-center p-8 bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl hover:scale-105 transition-transform"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
+                  <Counter end={1000} suffix="+" />
+                </div>
+                <p className="text-xl text-gray-300 font-semibold">Mutlu Müvekkil</p>
+                <p className="text-sm text-gray-500 mt-2">Güvenle hizmet verdik</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Services Section */}
+        <section id="hizmetler" className="relative py-16 md:py-24 overflow-hidden">
+          {/* Background Image with Overlay */}
+          <div className="absolute inset-0 z-0">
+            {/* Background Image */}
             <div 
-              className="text-center p-8 bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl hover:scale-105 transition-transform"
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage: 'url(https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop'
+              }}
+            ></div>
+            
+            {/* Dark Overlay - %10 daha koyu */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/88 to-gray-900/90"></div>
+            {/* Gold Overlay for warmth */}
+            <div className="absolute inset-0 bg-gold/10"></div>
+          </div>
+
+          {/* Content */}
+          <div className="container mx-auto px-4 relative z-10">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
+              data-aos="fade-up"
+              style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
+            >
+              Hizmetlerimiz
+            </h2>
+            <p 
+              className="text-center text-gray-400 mb-12 max-w-2xl mx-auto"
               data-aos="fade-up"
               data-aos-delay="100"
             >
-              <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
-                <Counter end={20} suffix="+" />
-              </div>
-              <p className="text-xl text-gray-300 font-semibold">Yıl Deneyim</p>
-              <p className="text-sm text-gray-500 mt-2">Hukuk alanında uzmanlık</p>
+              Geniş uzmanlık alanlarımızla her türlü hukuki ihtiyacınızda yanınızdayız
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+              {services.map((service, index) => {
+                // Skip hidden placeholder cards
+                if (service.hidden) {
+                  return <div key={service.id} className="hidden lg:block"></div>
+                }
+                
+                return (
+                  <ServiceCard 
+                    key={service.id}
+                    service={service}
+                    onClick={setSelectedService}
+                  />
+                )
+              })}
             </div>
-
-            <div 
-              className="text-center p-8 bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl hover:scale-105 transition-transform"
+          </div>
+        </section>
+        
+        {/* Testimonials Section */}
+        <section id="referanslar" className="py-16 md:py-24 bg-dark">
+          <div className="container mx-auto px-4">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
               data-aos="fade-up"
-              data-aos-delay="200"
+              style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
             >
-              <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
-                <Counter end={1000} suffix="+" />
-              </div>
-              <p className="text-xl text-gray-300 font-semibold">Mutlu Müvekkil</p>
-              <p className="text-sm text-gray-500 mt-2">Güvenle hizmet verdik</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Services Section */}
-      <section id="hizmetler" className="relative py-16 md:py-24 overflow-hidden">
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 z-0">
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{
-              backgroundImage: 'url(https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop)'
-            }}
-          ></div>
-          
-          {/* Dark Overlay - %10 daha koyu */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/88 to-gray-900/90"></div>
-          {/* Gold Overlay for warmth */}
-          <div className="absolute inset-0 bg-gold/10"></div>
-        </div>
+              Müvekkil Yorumları
+            </h2>
+            <p 
+              className="text-center text-gray-400 mb-12 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              Müvekkillerimizin memnuniyeti bizim için en önemli başarı göstergesidir
+            </p>
+            
+            {/* Slider Container */}
+            <div className="relative max-w-4xl mx-auto">
+              {/* Testimonial Card */}
+              <Testimonial testimonial={testimonials[currentTestimonial]} />
 
-        {/* Content */}
-        <div className="container mx-auto px-4 relative z-10">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
-            data-aos="fade-up"
-            style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
-          >
-            Hizmetlerimiz
-          </h2>
-          <p 
-            className="text-center text-gray-400 mb-12 max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Geniş uzmanlık alanlarımızla her türlü hukuki ihtiyacınızda yanınızdayız
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {services.map((service, index) => {
-              // Skip hidden placeholder cards
-              if (service.hidden) {
-                return <div key={service.id} className="hidden lg:block"></div>
-              }
-              
-              const IconComponent = service.icon
-              return (
-                <div
-                  key={service.id}
-                  onClick={() => service.detailedInfo && setSelectedService(service)}
-                  className="group bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6 hover:scale-105 hover:border-gold hover:bg-white/10 transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.4)] shadow-lg shadow-gold/10 cursor-pointer"
-                  data-aos="fade-up"
-                  data-aos-delay={index * 100}
-                >
-                  <div className="text-gold mb-4 group-hover:scale-110 transition-transform">
-                    <IconComponent className="w-12 h-12" />
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-400 leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-      
-      {/* Testimonials Section */}
-      <section id="referanslar" className="py-16 md:py-24 bg-dark">
-        <div className="container mx-auto px-4">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
-            data-aos="fade-up"
-            style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
-          >
-            Müvekkil Yorumları
-          </h2>
-          <p 
-            className="text-center text-gray-400 mb-12 max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Müvekkillerimizin memnuniyeti bizim için en önemli başarı göstergesidir
-          </p>
-          
-          {/* Slider Container */}
-          <div className="relative max-w-4xl mx-auto">
-            {/* Testimonial Card */}
-            <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-8 md:p-12">
-              {/* Star Rating */}
-              <div className="flex justify-center mb-6">
-                {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-gold text-gold" />
+              {/* Navigation Dots */}
+              <div className="flex justify-center gap-3 mt-8">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      index === currentTestimonial 
+                        ? 'bg-gold w-8' 
+                        : 'bg-gray-600 hover:bg-gray-500'
+                    }`}
+                    aria-label={`Testimonial ${index + 1}`}
+                  />
                 ))}
               </div>
-              
-              {/* Comment */}
-              <p className="text-gray-300 text-lg md:text-xl mb-8 italic leading-relaxed text-center">
-                "{testimonials[currentTestimonial].comment}"
-              </p>
-              
-              {/* Name and Service */}
-              <div className="text-center">
-                <p className="text-gold font-semibold text-xl">
-                  {testimonials[currentTestimonial].name}
-                </p>
-                <p className="text-gray-500">
-                  {testimonials[currentTestimonial].service}
-                </p>
-              </div>
-            </div>
-
-            {/* Navigation Dots */}
-            <div className="flex justify-center gap-3 mt-8">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    index === currentTestimonial 
-                      ? 'bg-gold w-8' 
-                      : 'bg-gray-600 hover:bg-gray-500'
-                  }`}
-                  aria-label={`Testimonial ${index + 1}`}
-                />
-              ))}
             </div>
           </div>
-        </div>
-      </section>
-      
-      {/* Contact Section */}
-      <section id="iletisim" className="py-16 md:py-24 bg-gradient-to-b from-dark to-gray-900">
-        <div className="container mx-auto px-4">
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
-            data-aos="fade-up"
-            style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
-          >
-            İletişim
-          </h2>
-          <p 
-            className="text-center text-gray-400 mb-12 max-w-2xl mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            Hukuki danışmanlık ve destek için bizimle iletişime geçin
-          </p>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-            {/* İletişim Bilgileri */}
-            <div className="space-y-6" data-aos="fade-right">
-              {/* Adres */}
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-white font-semibold mb-2 text-lg">Adres</h3>
-                  <p className="text-gray-400 leading-relaxed">
-                    {contactInfo.address.street}<br />
-                    {contactInfo.address.building}<br />
-                    {contactInfo.address.postalCode} {contactInfo.address.city}/{contactInfo.address.province}
-                  </p>
-                </div>
-              </div>
-              
-              {/* Telefon */}
-              <div className="flex items-start gap-4">
-                <Phone className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-white font-semibold mb-2 text-lg">Telefon</h3>
-                  <a 
-                    href={`tel:${contactInfo.phone.link}`}
-                    className="text-gray-400 hover:text-gold transition-colors"
-                  >
-                    {contactInfo.phone.display}
-                  </a>
-                </div>
-              </div>
-              
-              {/* E-posta */}
-              <div className="flex items-start gap-4">
-                <Mail className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-white font-semibold mb-2 text-lg">E-posta</h3>
-                  <a 
-                    href={`mailto:${contactInfo.email}`}
-                    className="text-gray-400 hover:text-gold transition-colors"
-                  >
-                    {contactInfo.email}
-                  </a>
-                </div>
-              </div>
-              
-              {/* Çalışma Saatleri */}
-              <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6 mt-8">
-                <h3 className="text-white font-semibold mb-3 text-lg">Çalışma Saatleri</h3>
-                <div className="space-y-2 text-gray-400">
-                  <p>Pazartesi - Cuma: 08:00 - 18:00</p>
-                  <p>Cumartesi: 09:00 - 13:00</p>
-                  <p>Pazar: Kapalı</p>
-                </div>
-              </div>
-
-              {/* WhatsApp CTA Button */}
-              <div className="mt-6 sm:mt-8 bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 backdrop-blur-lg border border-[#25D366]/30 rounded-2xl p-4 sm:p-6 shadow-xl shadow-[#25D366]/20">
-                <div className="text-center mb-3 sm:mb-4">
-                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 sm:mb-2">Ücretsiz Ön Görüşme</h3>
-                  <p className="text-gray-300 text-xs sm:text-sm">Hukuki sorunlarınız için hemen danışın</p>
-                </div>
-                <a
-                  href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-9 py-3 sm:py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none text-sm sm:text-base"
-                  style={{ 
-                    background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
-                    color: '#fff'
-                  }}
-                >
-                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-                  <span className="text-sm sm:text-base lg:text-lg">WhatsApp ile Hemen Başlayın</span>
-                </a>
-              </div>
-            </div>
+        </section>
+        
+        {/* Contact Section */}
+        <section id="iletisim" className="py-16 md:py-24 bg-gradient-to-b from-dark to-gray-900">
+          <div className="container mx-auto px-4">
+            <h2 
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-white mb-4"
+              data-aos="fade-up"
+              style={{ fontFamily: 'Dancing Script, cursive', fontWeight: '600' }}
+            >
+              İletişim
+            </h2>
+            <p 
+              className="text-center text-gray-400 mb-12 max-w-2xl mx-auto"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              Hukuki danışmanlık ve destek için bizimle iletişime geçin
+            </p>
             
-            {/* Google Maps */}
-            <div data-aos="fade-left" className="space-y-4">
-              <div className="rounded-2xl overflow-hidden border border-gold/20 h-96 lg:h-full min-h-[400px]">
-                <iframe
-                  src={contactInfo.mapEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Av. Halil Pektaş Hukuk Bürosu Konum"
-                />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+              {/* Contact Info and Working Hours */}
+              <div data-aos="fade-right" className="space-y-6">
+                {/* Contact Information */}
+                <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6">
+                  {/* Adres */}
+                  <div className="flex items-start gap-4 mb-6">
+                    <MapPin className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-white font-semibold mb-2 text-lg">Adres</h3>
+                      <p className="text-gray-400 leading-relaxed">
+                        {contactInfo.address.street}<br />
+                        {contactInfo.address.building}<br />
+                        {contactInfo.address.postalCode} {contactInfo.address.city}/{contactInfo.address.province}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Telefon */}
+                  <div className="flex items-start gap-4 mb-6">
+                    <Phone className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-white font-semibold mb-2 text-lg">Telefon</h3>
+                      <a 
+                        href={`tel:${contactInfo.phone.link}`}
+                        className="text-gray-400 hover:text-gold transition-colors block mb-2"
+                      >
+                        {contactInfo.phone.display}
+                      </a>
+                      <div className="text-gray-400">
+                        <span className="font-semibold text-white">Mobil: </span>
+                        <a 
+                          href={`tel:${contactInfo.whatsapp.link}`}
+                          className="hover:text-gold transition-colors"
+                        >
+                          {contactInfo.whatsapp.display}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* E-posta */}
+                  <div className="flex items-start gap-4">
+                    <Mail className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
+                    <div>
+                      <h3 className="text-white font-semibold mb-2 text-lg">E-posta</h3>
+                      <a 
+                        href={`mailto:${contactInfo.email}`}
+                        className="text-gray-400 hover:text-gold transition-colors"
+                      >
+                        {contactInfo.email}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Working Hours */}
+                <div className="bg-white/5 backdrop-blur-lg border border-gold/20 rounded-2xl p-6">
+                  <h3 className="text-white font-semibold mb-3 text-lg">Çalışma Saatleri</h3>
+                  <div className="space-y-2 text-gray-400">
+                    <p>Pazartesi - Cuma: 08:00 - 18:00</p>
+                    <p>Cumartesi: 09:00 - 13:00</p>
+                    <p>Pazar: Kapalı</p>
+                  </div>
+                </div>
               </div>
               
-              {/* Yol Tarifi Butonu */}
-              <a
-                href="https://www.google.com/maps/dir/?api=1&destination=39.091038,33.079296"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-gold/45 shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/50 text-sm sm:text-base"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.45) 100%)',
-                  color: '#d4af37'
-                }}
-              >
-                <Navigation className="w-5 h-5 sm:w-6 sm:h-6" />
-                <span className="text-white font-bold">Yol Tarifi Al</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Service Detail Modal */}
-      {selectedService && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
-          onClick={() => setSelectedService(null)}
-        >
-          <div 
-            className="bg-gradient-to-b from-gray-900 to-black border-2 border-gold/30 rounded-2xl max-w-2xl w-full my-4 shadow-2xl shadow-gold/20 max-h-[90vh] flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header */}
-            <div className="sticky top-0 bg-gradient-to-r from-gold/20 to-gold/10 backdrop-blur-md border-b border-gold/30 p-4 sm:p-6 flex items-center justify-between flex-shrink-0">
-              <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                {selectedService.icon && <selectedService.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gold flex-shrink-0" />}
-                <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white truncate">{selectedService.title}</h3>
-              </div>
-              <button
-                onClick={() => setSelectedService(null)}
-                className="text-gold hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg flex-shrink-0 ml-2"
-                aria-label="Kapat"
-              >
-                <X className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-            </div>
-
-            {/* Content - Scrollable */}
-            <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1">
-              <p className="text-gray-300 leading-relaxed whitespace-pre-line text-sm sm:text-base md:text-lg">
-                {selectedService.detailedInfo}
-              </p>
-
-              {/* CTA Button */}
-              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gold/20">
+              {/* Map, Navigation and WhatsApp CTA */}
+              <div data-aos="fade-left" className="space-y-6">
+                {/* Google Maps - Reduced size */}
+                <div className="rounded-2xl overflow-hidden border border-gold/20 h-80">
+                  <iframe
+                    src={contactInfo.mapEmbedUrl}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Av. Halil Pektaş Hukuk Bürosu Konum"
+                  />
+                </div>
+                
+                {/* Navigation Button */}
                 <a
-                  href={`https://wa.me/+905325648295?text=Merhaba, ${selectedService.title} hakkında bilgi almak istiyorum.`}
+                  href={`https://www.google.com/maps/dir/?api=1&destination=${contactInfo.mapCoordinates}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 text-sm sm:text-base"
+                  className="flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:scale-105 transition-all w-full backdrop-blur-md border border-gold/45 shadow-lg shadow-gold/30 hover:shadow-xl hover:shadow-gold/50 text-sm sm:text-base"
                   style={{ 
-                    background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
-                    color: '#fff'
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.45) 100%)',
+                    color: '#d4af37'
                   }}
                 >
-                  <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-                  <span>WhatsApp ile Danışın</span>
+                  <Navigation className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="text-white font-bold">Yol Tarifi Al</span>
                 </a>
+                
+                {/* WhatsApp CTA Button - Larger and more prominent */}
+                <div className="bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 backdrop-blur-lg border border-[#25D366]/30 rounded-2xl p-6 shadow-xl shadow-[#25D366]/20">
+                  <div className="text-center mb-4">
+                    <h3 className="text-2xl font-bold text-white mb-2">Ücretsiz Ön Görüşme</h3>
+                    <p className="text-gray-300">Hukuki sorunlarınız için hemen danışın</p>
+                  </div>
+                  <a
+                    href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none"
+                    style={{ 
+                      background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
+                      color: '#fff'
+                    }}
+                  >
+                    <MessageCircle className="w-6 h-6" />
+                    <span className="text-lg">WhatsApp ile Hemen Başlayın</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-      
-      {/* Footer */}
-      <footer className="bg-black border-t border-gold/20 py-8">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400">
-            © 2025 Av. Halil Pektaş Hukuk Bürosu - Tüm Hakları Saklıdır
-          </p>
-        </div>
-      </footer>
+        </section>
 
-      {/* Floating WhatsApp CTA Button */}
-      <a
-        href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group"
-        aria-label="Ücretsiz ön görüşme için WhatsApp"
-      >
-        <div className="relative">
-          {/* Pulse Animation Ring */}
-          <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-75"></div>
-          
-          {/* Main Button */}
-          <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-3 sm:px-6 sm:py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">
-            <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-            <span className="hidden sm:block font-bold text-xs sm:text-sm whitespace-nowrap">Ücretsiz Ön Görüşme</span>
+        {/* Service Detail Modal */}
+        {selectedService && (
+          <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm overflow-y-auto"
+            onClick={() => setSelectedService(null)}
+          >
+            <div 
+              className="bg-gradient-to-b from-gray-900 to-black border-2 border-gold/30 rounded-2xl max-w-2xl w-full my-4 shadow-2xl shadow-gold/20 max-h-[90vh] flex flex-col"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-gold/20 to-gold/10 backdrop-blur-md border-b border-gold/30 p-4 sm:p-6 flex items-center justify-between flex-shrink-0">
+                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                  {selectedService.icon && <selectedService.icon className="w-6 h-6 sm:w-8 sm:h-8 text-gold flex-shrink-0" />}
+                  <h3 className="text-lg sm:text-2xl md:text-3xl font-bold text-white truncate">{selectedService.title}</h3>
+                </div>
+                <button
+                  onClick={() => setSelectedService(null)}
+                  className="text-gold hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg flex-shrink-0 ml-2"
+                  aria-label="Kapat"
+                >
+                  <Star className="w-5 h-5 sm:w-6 sm:h-6" />
+                </button>
+              </div>
+
+              {/* Content - Scrollable */}
+              <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex-1">
+                <p className="text-gray-300 leading-relaxed whitespace-pre-line text-sm sm:text-base md:text-lg">
+                  {selectedService.detailedInfo}
+                </p>
+
+                {/* CTA Button */}
+                <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gold/20">
+                  <a
+                    href={`https://wa.me/+905325648295?text=Merhaba, ${selectedService.title} hakkında bilgi almak istiyorum.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 text-sm sm:text-base"
+                    style={{ 
+                      background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
+                      color: '#fff'
+                    }}
+                  >
+                    <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                    <span>WhatsApp ile Danışın</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </a>
+        )}
+        
+        {/* Footer */}
+        <footer className="bg-black border-t border-gold/20 py-8">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-gray-400">
+              © 2025 Av. Halil Pektaş Hukuk Bürosu - Tüm Hakları Saklıdır
+            </p>
+          </div>
+        </footer>
+
+        {/* Floating WhatsApp CTA Button */}
+        <a
+          href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group"
+          aria-label="Ücretsiz ön görüşme için WhatsApp"
+        >
+          <div className="relative">
+            {/* Pulse Animation Ring */}
+            <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-75"></div>
+            
+            {/* Main Button */}
+            <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-3 sm:px-6 sm:py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">
+              <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="hidden sm:block font-bold text-xs sm:text-sm whitespace-nowrap">Ücretsiz Ön Görüşme</span>
+            </div>
+          </div>
+        </a>
       </div>
     </>
   )
