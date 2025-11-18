@@ -52,6 +52,12 @@ const Header = ({ typewriterText }) => {
           >
             Hizmetler
           </Link>
+          <a 
+            href="/blog/index.html"
+            className="text-white hover:text-gold transition-colors cursor-pointer"
+          >
+            Blog
+          </a>
           <Link 
             to="referanslar" 
             smooth={true} 
@@ -111,6 +117,13 @@ const Header = ({ typewriterText }) => {
             >
               Hizmetler
             </Link>
+            <a 
+              href="/blog/index.html"
+              className="text-white hover:text-gold transition-colors cursor-pointer py-2 nav-link-mobile"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Blog
+            </a>
             <Link 
               to="referanslar" 
               smooth={true} 

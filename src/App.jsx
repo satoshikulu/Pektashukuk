@@ -652,12 +652,12 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="mb-6 md:mb-8"
+              className="mb-6 md:mb-8 px-2"
             >
-              <p className="text-gold text-base sm:text-lg md:text-xl font-semibold mb-2">
+              <p className="text-gold text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-2 leading-relaxed">
                 Konya Kulu Aile ve İcra Hukuku Avukatı – Av. Halil Pektaş
               </p>
-              <p className="text-gray-300 text-sm sm:text-base md:text-lg">
+              <p className="text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
                 20 Yıllık Deneyim • Yüzlerce Başarılı Dava
               </p>
             </motion.div>
@@ -1085,14 +1085,14 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
         <footer className="bg-black border-t border-gold/20 py-8">
           <div className="container mx-auto px-4">
             <div className="text-center mb-4">
-              <p className="text-gold text-sm md:text-base font-semibold mb-2">
+              <p className="text-gold text-xs sm:text-sm md:text-base font-semibold mb-2 leading-relaxed">
                 Konya Kulu Aile Hukuku • Boşanma Avukatı • İcra Hukuku • Avukat Halil Pektaş
               </p>
-              <p className="text-gray-500 text-xs md:text-sm">
+              <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
                 Velayet Davası • Nafaka • Tahliye • Alacak Tahsilatı • 20 Yıl Deneyim
               </p>
             </div>
-            <p className="text-gray-400 text-center text-sm">
+            <p className="text-gray-400 text-center text-xs sm:text-sm">
               © 2025 Av. Halil Pektaş Hukuk Bürosu - Tüm Hakları Saklıdır
             </p>
           </div>
