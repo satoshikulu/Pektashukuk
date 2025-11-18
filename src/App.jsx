@@ -637,16 +637,30 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gold mb-6 md:mb-8 leading-tight px-2"
+              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gold mb-4 md:mb-6 leading-tight px-2"
               style={{ fontFamily: 'Garamond, Georgia, serif' }}
             >
-              "Profesyonel Yaklaşım, Güvenilir Danışmanlık' {' '}
+              "Profesyonel Yaklaşım, Güvenilir Danışmanlık" {' '}
               <span className="text-white text-base sm:text-lg md:text-2xl lg:text-3xl wave-text block mt-3 md:mt-4">
                 {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
                   <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
                 ))}
               </span>
             </motion.h1>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="mb-6 md:mb-8"
+            >
+              <p className="text-gold text-base sm:text-lg md:text-xl font-semibold mb-2">
+                Konya Kulu Aile ve İcra Hukuku Avukatı – Av. Halil Pektaş
+              </p>
+              <p className="text-gray-300 text-sm sm:text-base md:text-lg">
+                20 Yıllık Deneyim • Yüzlerce Başarılı Dava
+              </p>
+            </motion.div>
             
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
@@ -694,14 +708,15 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                   Av. Halil Pektaş Hukuk Bürosu
                 </h3>
                 <p className="text-gray-300 mb-4 leading-relaxed">
-                  Kulu, Konya'da hizmet veren hukuk büromuz, müvekkillerimize en yüksek kalitede 
-                  hukuki danışmanlık ve temsil hizmeti sunmaktadır. Yılların getirdiği deneyim ve 
-                  uzmanlıkla, her türlü hukuki sorununuzda yanınızdayız.
+                  Konya Kulu'da 20 yıllık deneyimiyle hizmet veren Avukat Halil Pektaş, müvekkillerimize 
+                  aile hukuku, boşanma davaları, velayet ve nafaka konularında en yüksek kalitede 
+                  hukuki danışmanlık ve temsil hizmeti sunmaktadır. İcra avukatı olarak alacak tahsilatı 
+                  ve tahliye davalarında da uzman desteğimizle yanınızdayız.
                 </p>
                 <p className="text-gray-300 mb-4 leading-relaxed">
-                  Av. Halil Pektaş, aile hukuku, ticaret hukuku, ceza hukuku, iş hukuku ve 
-                  gayrimenkul hukuku alanlarında uzmanlaşmış olup, müvekkillerinin haklarını 
-                  en iyi şekilde korumak için çalışmaktadır.
+                  Konya Kulu boşanma avukatı Av. Halil Pektaş, aile hukuku avukatı, icra hukuku, 
+                  ticaret hukuku, ceza hukuku ve iş hukuku alanlarında uzmanlaşmış olup, 
+                  müvekkillerinin haklarını en iyi şekilde korumak için çalışmaktadır.
                 </p>
                 <p className="text-gray-300 leading-relaxed">
                   Profesyonel yaklaşımımız, etik değerlerimiz ve müvekkil memnuniyetine verdiğimiz 
@@ -1068,8 +1083,16 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
         
         {/* Footer */}
         <footer className="bg-black border-t border-gold/20 py-8">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-gray-400">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-4">
+              <p className="text-gold text-sm md:text-base font-semibold mb-2">
+                Konya Kulu Aile Hukuku • Boşanma Avukatı • İcra Hukuku • Avukat Halil Pektaş
+              </p>
+              <p className="text-gray-500 text-xs md:text-sm">
+                Velayet Davası • Nafaka • Tahliye • Alacak Tahsilatı • 20 Yıl Deneyim
+              </p>
+            </div>
+            <p className="text-gray-400 text-center text-sm">
               © 2025 Av. Halil Pektaş Hukuk Bürosu - Tüm Hakları Saklıdır
             </p>
           </div>
