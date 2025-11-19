@@ -875,7 +875,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-white mb-4"
                 style={{ fontFamily: 'Charm, cursive' }}
               >
-                Hukuki Bilgi Merkezi
+                Hukuk Bilgi Merkezi
               </h2>
 
               {/* Description */}
@@ -911,7 +911,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                   href="/blog/index.html"
                   className="inline-flex items-center gap-2 bg-gold hover:bg-gold/90 text-black font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg shadow-gold/20"
                 >
-                  <span>👉 Hukuki Makaleleri Oku</span>
+                  <span>👉 Hukuki Makalelerimi Okuyunuz</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
