@@ -1144,10 +1144,11 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 </div>
                 <button
                   onClick={() => setSelectedService(null)}
-                  className="text-gold hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg flex-shrink-0 ml-2"
+                  className="text-gold hover:text-white transition-colors p-3 hover:bg-white/10 rounded-lg flex-shrink-0 ml-2 flex flex-col items-center border border-gold/30"
                   aria-label="Kapat"
                 >
-                  <Star className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <div className="text-2xl sm:text-3xl font-bold">✕</div>
+                  <span className="text-sm mt-1 font-semibold">kapat</span>
                 </button>
               </div>
 
@@ -1187,6 +1188,15 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
               </p>
               <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
                 Velayet Davası • Nafaka • Tahliye • Alacak Tahsilatı • 20 Yıl Deneyim
+              </p>
+              <p className="text-gold text-xs sm:text-sm md:text-base font-semibold mb-2 leading-relaxed mt-4">
+                Konya Kulu Family Law • Divorce Lawyer • Enforcement Law • Attorney Halil Pektaş
+              </p>
+              <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
+                Child Custody Cases • Alimony • Eviction • Debt Collection • 20 Years of Experience
+              </p>
+              <p className="text-gray-400 text-xs md:text-sm leading-relaxed mt-3 max-w-4xl mx-auto">
+                Expert Legal Counsel in Kulu & Konya: As your dedicated local attorney, I provide focused and effective legal representation for family law disputes, divorce proceedings, and financial enforcement cases. With over two decades of experience navigating the local courts, I am committed to securing practical solutions for matters of custody, support payments, tenant eviction, and debt recovery.
               </p>
             </div>
             <p className="text-gray-400 text-center text-xs sm:text-sm">
