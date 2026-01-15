@@ -177,7 +177,7 @@ function SplashScreen({ onComplete }) {
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, delay: 0.8, repeat: 0 }}
+                    transition={{ duration: 0.5, delay: 1.0, repeat: 0 }}
                     className="text-gold font-semibold"
                   >
                     Güven
@@ -185,7 +185,7 @@ function SplashScreen({ onComplete }) {
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, delay: 1.8, repeat: 0 }}
+                    transition={{ duration: 0.5, delay: 2.0, repeat: 0 }}
                     className="mx-2"
                   >
                     •
@@ -193,7 +193,7 @@ function SplashScreen({ onComplete }) {
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, delay: 2.8, repeat: 0 }}
+                    transition={{ duration: 0.5, delay: 3.0, repeat: 0 }}
                     className="text-gold font-semibold"
                   >
                     Deneyim
@@ -201,7 +201,7 @@ function SplashScreen({ onComplete }) {
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, delay: 3.8, repeat: 0 }}
+                    transition={{ duration: 0.5, delay: 4.0, repeat: 0 }}
                     className="mx-2"
                   >
                     •
@@ -209,7 +209,7 @@ function SplashScreen({ onComplete }) {
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1, delay: 4.8, repeat: 0 }}
+                    transition={{ duration: 0.5, delay: 4.5, repeat: 0 }}
                     className="text-gold font-semibold"
                   >
                     Başarı
