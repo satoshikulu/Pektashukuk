@@ -173,7 +173,48 @@ function SplashScreen({ onComplete }) {
                 transition={{ delay: 0.6 }}
                 className="text-gray-400 text-sm md:text-base"
               >
-                Güven • Deneyim • Başarı
+                <span className="inline-block">
+                  <motion.span
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, delay: 0.8, repeat: 0 }}
+                    className="text-gold font-semibold"
+                  >
+                    Güven
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, delay: 1.8, repeat: 0 }}
+                    className="mx-2"
+                  >
+                    •
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, delay: 2.8, repeat: 0 }}
+                    className="text-gold font-semibold"
+                  >
+                    Deneyim
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, delay: 3.8, repeat: 0 }}
+                    className="mx-2"
+                  >
+                    •
+                  </motion.span>
+                  <motion.span
+                    initial={{ opacity: 0.3 }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 1, delay: 4.8, repeat: 0 }}
+                    className="text-gold font-semibold"
+                  >
+                    Başarı
+                  </motion.span>
+                </span>
               </motion.p>
             </motion.div>
           )}
