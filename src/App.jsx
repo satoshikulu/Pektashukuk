@@ -17,16 +17,16 @@ function SplashScreen({ onComplete }) {
       setShowSlogan(true)
     }, 2000)
 
-    // Complete splash screen after 5 seconds
+    // Complete splash screen after 6 seconds (1 second longer)
     const completeTimer = setTimeout(() => {
-      console.log('5 seconds passed, calling onComplete')
+      console.log('6 seconds passed, calling onComplete')
       if (typeof onComplete === 'function') {
         onComplete()
         console.log('onComplete called successfully')
       } else {
         console.error('onComplete is not a function!', onComplete)
       }
-    }, 5000)
+    }, 6000)
 
     return () => {
       console.log('SplashScreen unmounting')
@@ -175,42 +175,45 @@ function SplashScreen({ onComplete }) {
               >
                 <span className="inline-block">
                   <motion.span
-                    initial={{ opacity: 0.3 }}
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.5, delay: 1.0, repeat: 0 }}
-                    className="text-gold font-semibold"
+                    initial={{ opacity: 0.3, scale: 1 }}
+                    animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.1, 1] }}
+                    transition={{ duration: 1.0, delay: 1.5, repeat: 0 }}
+                    className="text-gold font-bold"
+                    style={{ textShadow: '0 0 20px rgba(212, 175, 55, 0.8)' }}
                   >
                     Güven
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.5, delay: 2.0, repeat: 0 }}
+                    transition={{ duration: 1.0, delay: 2.0, repeat: 0 }}
                     className="mx-2"
                   >
                     •
                   </motion.span>
                   <motion.span
-                    initial={{ opacity: 0.3 }}
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.5, delay: 3.0, repeat: 0 }}
-                    className="text-gold font-semibold"
+                    initial={{ opacity: 0.3, scale: 1 }}
+                    animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.1, 1] }}
+                    transition={{ duration: 1.0, delay: 2.5, repeat: 0 }}
+                    className="text-gold font-bold"
+                    style={{ textShadow: '0 0 20px rgba(212, 175, 55, 0.8)' }}
                   >
                     Deneyim
                   </motion.span>
                   <motion.span
                     initial={{ opacity: 0.3 }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.5, delay: 4.0, repeat: 0 }}
+                    transition={{ duration: 1.0, delay: 3.0, repeat: 0 }}
                     className="mx-2"
                   >
                     •
                   </motion.span>
                   <motion.span
-                    initial={{ opacity: 0.3 }}
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 0.5, delay: 4.5, repeat: 0 }}
-                    className="text-gold font-semibold"
+                    initial={{ opacity: 0.3, scale: 1 }}
+                    animate={{ opacity: [0.3, 1, 0.3], scale: [1, 1.1, 1] }}
+                    transition={{ duration: 1.0, delay: 3.5, repeat: 0 }}
+                    className="text-gold font-bold"
+                    style={{ textShadow: '0 0 20px rgba(212, 175, 55, 0.8)' }}
                   >
                     Başarı
                   </motion.span>
@@ -662,7 +665,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
             <div 
               className="absolute inset-0 bg-cover bg-center hero-bg-animated"
               style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop'
+                backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)'
               }}
             ></div>
             
