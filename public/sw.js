@@ -1,9 +1,9 @@
-const CACHE_NAME = 'pektas-hukuk-v1';
+const CACHE_NAME = 'pektas-hukuk-v2';
 const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/justice-icon.svg',
+  '/icons/logohukuk.PNG?v=2',
   '/blog/index.html',
   'https://fonts.googleapis.com/css2?family=Charm:wght@400;700&family=Spectral:wght@300;400;500;600&family=Dancing+Script:wght@400;600;700&display=swap'
 ];
