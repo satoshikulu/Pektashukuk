@@ -301,10 +301,16 @@ function App() {
   const [showSplash, setShowSplash] = useState(true)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentHeroImage, setCurrentHeroImage] = useState(0)
   const [typewriterText, setTypewriterText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const [selectedService, setSelectedService] = useState(null)
   const fullText = 'Avukat Halil Pektaş'
+  const heroBackgroundImages = [
+    'https://images.unsplash.com/photo-1453945619913-79ec89a82c51?q=80&w=2070&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1436450412740-6b988f486c6b?q=80&w=2070&auto=format&fit=crop'
+  ]
 
   // Check if splash screen should be shown
   useEffect(() => {
@@ -623,6 +629,15 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
     return () => clearInterval(timer)
   }, [testimonials.length])
 
+  // Hero background images auto-play
+  useEffect(() => {
+    const heroTimer = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroBackgroundImages.length)
+    }, 10000)
+
+    return () => clearInterval(heroTimer)
+  }, [heroBackgroundImages.length])
+
   // Prevent body scroll when service modal is open
   useEffect(() => {
     if (selectedService) {
@@ -661,13 +676,17 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
         >
           {/* Background Image with Overlay */}
           <div className="absolute inset-0 z-0">
-            {/* Animated Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center hero-bg-animated"
-              style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2070&auto=format&fit=crop)'
-              }}
-            ></div>
+            {/* Animated Background Images */}
+            {heroBackgroundImages.map((image, index) => (
+              <div
+                key={image}
+                className="absolute inset-0 bg-cover bg-center hero-bg-animated transition-opacity duration-[1800ms]"
+                style={{
+                  backgroundImage: `url(${image})`,
+                  opacity: index === currentHeroImage ? 1 : 0
+                }}
+              ></div>
+            ))}
             
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/65 to-gray-900/70"></div>
@@ -676,61 +695,80 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
           </div>
           
           {/* Content */}
-          <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-            <motion.h1 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-gold mb-4 md:mb-6 leading-tight px-2"
-              style={{ fontFamily: 'Garamond, Georgia, serif' }}
-            >
-              "Profesyonel Yaklaşım, Güvenilir Danışmanlık" {' '}
-              <span className="text-white text-base sm:text-lg md:text-2xl lg:text-3xl wave-text block mt-3 md:mt-4">
-                {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
-                  <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
-                ))}
-              </span>
-            </motion.h1>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="mb-6 md:mb-8 px-2"
-            >
-              <p className="text-gold text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-2 leading-relaxed">
-                Konya Kulu Aile ve İcra Hukuku Avukatı – Av. Halil Pektaş
-              </p>
-              <p className="text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">
-                20 Yıllık Deneyim • Yüzlerce Başarılı Dava
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-            >
-              <Link 
-                to="iletisim" 
-                smooth={true} 
-                duration={500}
+          <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+            <div className="rounded-3xl border border-white/10 bg-black/28 backdrop-blur-md px-4 py-5 sm:px-6 sm:py-7 md:px-8 md:py-8 shadow-2xl shadow-black/35">
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-gold mb-3 md:mb-5 leading-tight px-2"
+                style={{ fontFamily: 'Garamond, Georgia, serif' }}
               >
-                <button className="bg-gold text-black px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-transform w-full sm:w-auto">
-                  İletişime Geç
-                </button>
-              </Link>
-              <Link 
-                to="hizmetler" 
-                smooth={true} 
-                duration={500}
+                <span className="block">
+                  "Profesyonel Yaklaşım, Güvenilir Danışmanlık"
+                </span>
+                <span className="text-white text-sm sm:text-base md:text-xl lg:text-2xl wave-text block mt-2 md:mt-3">
+                  {"''Haklarınız İçin En Etkili Savunma.\"".split('').map((char, index) => (
+                    <span key={index}>{char === ' ' ? '\u00A0' : char}</span>
+                  ))}
+                </span>
+              </motion.h1>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="mb-3 md:mb-5 px-2"
               >
-                <button className="border-2 border-gold text-gold px-8 py-3 rounded-lg font-semibold hover:bg-gold hover:text-black transition-all w-full sm:w-auto">
-                  Hizmetlerimiz
-                </button>
-              </Link>
-            </motion.div>
+                <p className="text-gold text-xs sm:text-sm md:text-base lg:text-lg font-semibold mb-2 leading-relaxed">
+                  Konya Kulu Aile ve İcra Hukuku Avukatı – Av. Halil Pektaş
+                </p>
+                <p className="text-gray-200 text-xs sm:text-sm md:text-sm lg:text-base leading-relaxed">
+                  20 Yıllık Deneyim • Yüzlerce Başarılı Dava
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.55, duration: 0.6 }}
+                className="mb-5 md:mb-7 px-2"
+              >
+                <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-gold/45 bg-black/35 backdrop-blur-sm px-3 py-1.5 sm:px-5 text-[10px] sm:text-xs md:text-sm text-white">
+                  <span className="font-semibold text-gold">20+ Yıl Deneyim</span>
+                  <span className="text-gold/80">•</span>
+                  <span className="font-semibold text-gold">500+ Dava</span>
+                  <span className="text-gold/80">•</span>
+                  <span className="font-semibold text-gold">Hızlı Geri Dönüş</span>
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+                className="flex flex-col sm:flex-row gap-3 justify-center"
+              >
+                <Link 
+                  to="iletisim" 
+                  smooth={true} 
+                  duration={500}
+                >
+                  <button className="bg-gold text-black px-7 py-2.5 rounded-lg text-sm md:text-base font-semibold hover:scale-105 transition-transform w-full sm:w-auto">
+                    İletişime Geç
+                  </button>
+                </Link>
+                <Link 
+                  to="hizmetler" 
+                  smooth={true} 
+                  duration={500}
+                >
+                  <button className="border-2 border-gold text-gold px-7 py-2.5 rounded-lg text-sm md:text-base font-semibold hover:bg-gold hover:text-black transition-all w-full sm:w-auto">
+                    Hizmetlerimiz
+                  </button>
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </section>
         
@@ -766,6 +804,16 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                   Profesyonel yaklaşımımız, etik değerlerimiz ve müvekkil memnuniyetine verdiğimiz 
                   önem ile hukuki süreçlerinizde güvenilir bir çözüm ortağıyız.
                 </p>
+
+                {/* Professional Portrait */}
+                <div className="mt-8 rounded-2xl overflow-hidden border border-gold/30 shadow-xl shadow-gold/20">
+                  <img
+                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop"
+                    alt="Avukat ofisinde profesyonel portre"
+                    className="w-full h-72 object-cover"
+                    loading="lazy"
+                  />
+                </div>
               </div>
               
               {/* Misyon & Vizyon Kartı */}
@@ -1155,7 +1203,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                     href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 animate-pulse hover:animate-none"
+                    className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 slow-heartbeat hover:animate-none"
                     style={{ 
                       background: 'linear-gradient(135deg, rgba(37, 211, 102, 0.3) 0%, rgba(37, 211, 102, 0.4) 100%)',
                       color: '#fff'
@@ -1226,21 +1274,29 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
         {/* Footer */}
         <footer className="bg-black border-t border-gold/20 py-8">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-4">
-              <p className="text-gold text-xs sm:text-sm md:text-base font-semibold mb-2 leading-relaxed">
-                Konya Kulu Aile Hukuku • Boşanma Avukatı • İcra Hukuku • Avukat Halil Pektaş
-              </p>
-              <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
-                Velayet Davası • Nafaka • Tahliye • Alacak Tahsilatı • 20 Yıl Deneyim
-              </p>
-              <p className="text-gold text-xs sm:text-sm md:text-base font-semibold mb-2 leading-relaxed mt-4">
-                Konya Kulu Family Law • Divorce Lawyer • Enforcement Law • Attorney Halil Pektaş
-              </p>
-              <p className="text-gray-500 text-xs md:text-sm leading-relaxed">
-                Child Custody Cases • Alimony • Eviction • Debt Collection • 20 Years of Experience
-              </p>
-              <p className="text-gray-400 text-xs md:text-sm leading-relaxed mt-3 max-w-4xl mx-auto">
-                Expert Legal Counsel in Kulu & Konya: As your dedicated local attorney, I provide focused and effective legal representation for family law disputes, divorce proceedings, and financial enforcement cases. With over two decades of experience navigating the local courts, I am committed to securing practical solutions for matters of custody, support payments, tenant eviction, and debt recovery.
+            <div className="mb-6 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 text-left">
+                <div className="bg-white/5 border border-gold/20 rounded-2xl p-5 md:p-6">
+                  <p className="footer-seo-text text-gold text-xs sm:text-sm md:text-base font-semibold mb-2 leading-relaxed">
+                    Av. Halil Pektaş Hukuk Bürosu | Konya Kulu Avukat | Aile Hukuku, Boşanma Davası ve İcra Hukuku
+                  </p>
+                  <p className="footer-seo-text text-gray-300 text-xs md:text-sm leading-relaxed font-medium">
+                    Velayet davası, nafaka, mal paylaşımı, tahliye davaları, alacak tahsilatı ve icra takibi alanlarında 20 yıllık deneyimle profesyonel hukuki danışmanlık ve dava takibi hizmeti.
+                  </p>
+                </div>
+
+                <div className="bg-white/5 border border-gold/20 rounded-2xl p-5 md:p-6">
+                  <p className="footer-seo-text text-gold text-xs sm:text-sm md:text-base font-semibold mb-2 leading-relaxed">
+                    Halil Pektas Law Office | Attorney in Kulu, Konya | Family Law, Divorce and Enforcement Law
+                  </p>
+                  <p className="footer-seo-text text-gray-300 text-xs md:text-sm leading-relaxed font-medium">
+                    Trusted legal representation for child custody, alimony, property division, eviction cases, debt collection and enforcement proceedings, backed by over 20 years of courtroom experience.
+                  </p>
+                </div>
+              </div>
+
+              <p className="footer-seo-text text-gray-400 text-[11px] md:text-xs leading-relaxed max-w-4xl mx-auto text-center mt-4 font-medium">
+                Local legal counsel in Kulu and Konya with a disciplined, client-focused and results-oriented approach for individuals, families and businesses seeking reliable legal solutions.
               </p>
             </div>
             <p className="text-gray-400 text-center text-xs sm:text-sm">
@@ -1259,7 +1315,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
         >
           <div className="relative">
             {/* Pulse Animation Ring */}
-            <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-75"></div>
+            <div className="absolute inset-0 bg-[#25D366] rounded-full slow-ping"></div>
             
             {/* Main Button */}
             <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-3 sm:px-6 sm:py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">

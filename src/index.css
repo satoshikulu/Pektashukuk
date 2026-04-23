@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -189,6 +191,64 @@
 
 .hero-bg-animated {
   animation: kenBurns 20s ease-in-out infinite;
+}
+
+@keyframes cardLightSweep {
+  0% {
+    transform: translateX(-180px) rotate(12deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(520px) rotate(12deg);
+    opacity: 0;
+  }
+}
+
+.service-card-light {
+  animation: cardLightSweep 1.8s ease-out;
+}
+
+@keyframes slowHeartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  5% {
+    transform: scale(1.025);
+  }
+  10% {
+    transform: scale(1);
+  }
+}
+
+.slow-heartbeat {
+  animation: slowHeartbeat 10s ease-in-out infinite;
+}
+
+@keyframes slowPing {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  10% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.slow-ping {
+  animation: slowPing 10s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.footer-seo-text {
+  font-family: 'Quicksand', 'Spectral', sans-serif;
+  letter-spacing: 0.15px;
 }
 
 /* Scroll performance optimization */
