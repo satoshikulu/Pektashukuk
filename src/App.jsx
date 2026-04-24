@@ -604,12 +604,14 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
   // Typewriter Effect
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100
-    const pauseTime = isDeleting ? 500 : 10000 // 10 saniye bekleme süresi
+    let pauseTimer
 
     const timer = setTimeout(() => {
       if (!isDeleting && typewriterText === fullText) {
-        setTimeout(() => setIsDeleting(true), pauseTime)
+        // Metin tamamlanınca 25 saniye bekle, sonra silmeye başla
+        pauseTimer = setTimeout(() => setIsDeleting(true), 25000)
       } else if (isDeleting && typewriterText === '') {
+        // Silme biter bitmez yeniden yazmaya başla
         setIsDeleting(false)
       } else if (isDeleting) {
         setTypewriterText(fullText.substring(0, typewriterText.length - 1))
@@ -618,7 +620,10 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       }
     }, typingSpeed)
 
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      if (pauseTimer) clearTimeout(pauseTimer)
+    }
   }, [typewriterText, isDeleting, fullText])
 
   // Testimonials Auto-play
