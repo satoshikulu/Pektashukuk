@@ -1,4 +1,4 @@
-import { StrictMode, useEffect } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -17,7 +17,7 @@ AOS.init({
 })
 
 // Initialize performance monitoring
-if (process.env.NODE_ENV === 'production') {
+if (import.meta.env.PROD) {
   onCLS(console.log)
   onINP(console.log)
   onFCP(console.log)

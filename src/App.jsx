@@ -513,7 +513,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       id: 1,
       name: "Ayşe Y.",
       rating: 5,
-      comment: "Boşanma davamda gösterdiği profesyonel yaklaşım ve başarılı sonuç için teşekkür ederim. Süreç boyunca her adımda yanımda oldu.",
+      comment: "Boşanma davamda gösterdiği profesyonel yaklaşım ve sonuç için teşekkür ederim. Süreç boyunca her adımda yanımda oldu.",
       service: "Aile Hukuku"
     },
     {
@@ -534,7 +534,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
       id: 4,
       name: "Ahmet T.",
       rating: 5,
-      comment: "Ceza davamda gösterdiği çaba ve başarıdan dolayı çok memnunum. Detaylı analizleri ve stratejik yaklaşımı davamı kazandırdı.",
+      comment: "Ceza davamda gösterdiği çaba ve detaylı analizleri ile stratejik yaklaşımı davamı olumlu sonuçlandırdı.",
       service: "Ceza Hukuku"
     },
     {
@@ -582,7 +582,8 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
     },
     whatsapp: {
       display: "0532 564 82 95",
-      link: "+905325648295"
+      link: "905325648295",
+      tel: "+905325648295"
     },
     email: "info@halilpektashukuk.com",
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3068.8157!2d33.079289!3d39.091067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDA1JzI3LjciTiAzM8KwMDQnNDUuNSJF!5e0!3m2!1str!2str!4v1699999999999",
@@ -729,7 +730,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                   Konya Kulu Aile ve İcra Hukuku Avukatı – Av. Halil Pektaş
                 </p>
                 <p className="text-gray-200 text-xs sm:text-sm md:text-sm lg:text-base leading-relaxed">
-                  20 Yıllık Deneyim • Yüzlerce Başarılı Dava
+                  20 Yıllık Mesleki Deneyim • Özenli Hukuki Takip
                 </p>
               </motion.div>
 
@@ -742,7 +743,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 <div className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-gold/45 bg-black/35 backdrop-blur-sm px-3 py-1.5 sm:px-5 text-[10px] sm:text-xs md:text-sm text-white">
                   <span className="font-semibold text-gold">20+ Yıl Deneyim</span>
                   <span className="text-gold/80">•</span>
-                  <span className="font-semibold text-gold">500+ Dava</span>
+                  <span className="font-semibold text-gold">Hukuki Danışmanlık</span>
                   <span className="text-gold/80">•</span>
                   <span className="font-semibold text-gold">Hızlı Geri Dönüş</span>
                 </div>
@@ -796,14 +797,14 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 </h3>
                 <p className="text-gray-300 mb-4 leading-relaxed">
                   Konya Kulu'da 20 yıllık deneyimiyle hizmet veren Avukat Halil Pektaş, müvekkillerimize 
-                  aile hukuku, boşanma davaları, velayet ve nafaka konularında en yüksek kalitede 
-                  hukuki danışmanlık ve temsil hizmeti sunmaktadır. İcra avukatı olarak alacak tahsilatı 
+                  aile hukuku, boşanma davaları, velayet ve nafaka konularında hukuki danışmanlık 
+                  ve temsil hizmeti sunmaktadır. İcra avukatı olarak alacak tahsilatı 
                   ve tahliye davalarında da uzman desteğimizle yanınızdayız.
                 </p>
                 <p className="text-gray-300 mb-4 leading-relaxed">
                   Konya Kulu boşanma avukatı Av. Halil Pektaş, aile hukuku avukatı, icra hukuku, 
                   ticaret hukuku, ceza hukuku ve iş hukuku alanlarında uzmanlaşmış olup, 
-                  müvekkillerinin haklarını en iyi şekilde korumak için çalışmaktadır.
+                  müvekkillerinin haklarını korumak için çalışmaktadır.
                 </p>
                 <p className="text-gray-300 leading-relaxed">
                   Profesyonel yaklaşımımız, etik değerlerimiz ve müvekkil memnuniyetine verdiğimiz 
@@ -858,8 +859,8 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
                   <Counter end={500} suffix="+" />
                 </div>
-                <p className="text-xl text-gray-300 font-semibold">Başarılı Dava</p>
-                <p className="text-sm text-gray-500 mt-2">Müvekkillerimiz için kazandık</p>
+                <p className="text-xl text-gray-300 font-semibold">Tamamlanan Hukuki Süreç</p>
+                <p className="text-sm text-gray-500 mt-2">Müvekkillerimiz için hizmet verdik</p>
               </div>
 
               <div 
@@ -882,8 +883,8 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 <div className="text-5xl md:text-6xl font-bold text-gold mb-3">
                   <Counter end={1000} suffix="+" />
                 </div>
-                <p className="text-xl text-gray-300 font-semibold">Mutlu Müvekkil</p>
-                <p className="text-sm text-gray-500 mt-2">Güvenle hizmet verdik</p>
+                <p className="text-xl text-gray-300 font-semibold">Müvekkil</p>
+                <p className="text-sm text-gray-500 mt-2">Hizmet verdik</p>
               </div>
             </div>
           </div>
@@ -925,7 +926,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {services.map((service, index) => {
+              {services.map((service) => {
                 // Skip hidden placeholder cards
                 if (service.hidden) {
                   return <div key={service.id} className="hidden lg:block"></div>
@@ -1132,7 +1133,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                       <div className="text-gray-400">
                         <span className="font-semibold text-white">Mobil: </span>
                         <a 
-                          href={`tel:${contactInfo.whatsapp.link}`}
+                          href={`tel:${contactInfo.whatsapp.tel}`}
                           className="hover:text-gold transition-colors"
                         >
                           {contactInfo.whatsapp.display}
@@ -1201,11 +1202,11 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 {/* WhatsApp CTA Button - Larger and more prominent */}
                 <div className="bg-gradient-to-r from-[#25D366]/10 to-[#128C7E]/10 backdrop-blur-lg border border-[#25D366]/30 rounded-2xl p-6 shadow-xl shadow-[#25D366]/20">
                   <div className="text-center mb-4">
-                    <h3 className="text-2xl font-bold text-white mb-2">Ücretsiz Ön Görüşme</h3>
+                    <h3 className="text-2xl font-bold text-white mb-2">Ön Bilgilendirme Görüşmesi</h3>
                     <p className="text-gray-300">Hukuki sorunlarınız için hemen danışın</p>
                   </div>
                   <a
-                    href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
+                    href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ön bilgilendirme görüşmesi için bilgi almak istiyorum.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 slow-heartbeat hover:animate-none"
@@ -1258,7 +1259,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
                 {/* CTA Button */}
                 <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-gold/20">
                   <a
-                    href={`https://wa.me/+905325648295?text=Merhaba, ${selectedService.title} hakkında bilgi almak istiyorum.`}
+                    href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ${selectedService.title} hakkında bilgi almak istiyorum.`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-xl font-bold hover:scale-105 transition-all w-full backdrop-blur-md border-2 border-[#25D366] shadow-lg shadow-[#25D366]/30 hover:shadow-xl hover:shadow-[#25D366]/50 text-sm sm:text-base"
@@ -1312,7 +1313,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
 
         {/* Floating WhatsApp CTA Button */}
         <a
-          href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ücretsiz ön görüşme için bilgi almak istiyorum.`}
+          href={`https://wa.me/${contactInfo.whatsapp.link}?text=Merhaba, ön bilgilendirme görüşmesi için bilgi almak istiyorum.`}
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group"
@@ -1325,7 +1326,7 @@ Arabuluculuk, tarafların kendi çözümlerini üretmelerine olanak tanır ve ka
             {/* Main Button */}
             <div className="relative flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white px-4 py-3 sm:px-6 sm:py-4 rounded-full shadow-2xl hover:shadow-[#25D366]/50 transition-all hover:scale-110 backdrop-blur-sm border-2 border-white/20">
               <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="hidden sm:block font-bold text-xs sm:text-sm whitespace-nowrap">Ücretsiz Ön Görüşme</span>
+              <span className="hidden sm:block font-bold text-xs sm:text-sm whitespace-nowrap">Ön Bilgilendirme</span>
             </div>
           </div>
         </a>
